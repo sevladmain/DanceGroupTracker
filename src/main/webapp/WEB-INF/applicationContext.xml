@@ -3,11 +3,30 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:security="http://www.springframework.org/schema/security"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
     <tx:annotation-driven />
     <jdbc:embedded-database id="dataSource">
         <jdbc:script location="classpath:scheme.sql"/>
     </jdbc:embedded-database>
+    <security:http auto-config="true">
+        <security:intercept-url pattern = "/**" access="ROLE_USER" />
+        <security:form-login
+            login-page="/login"
+            default-target-url="/"
+            authentication-failure-url="/login?error"
+            username-parameter="username"
+            password-parameter="password" />
+        <security:logout logout-success-url="/login?logout"/>
+    </security:http>
+    <security:authentication-manager>
+        <security:authentication-provider>
+            <security:jdbc-user-service data-source-ref="dataSource"
+                                        authorities-by-username-query="SELECT username, authority From authorities WHERE username = ?"
+                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
+        </security:authentication-provider>
+    </security:authentication-manager>
 </beans>
