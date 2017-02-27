@@ -9,11 +9,12 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
     <tx:annotation-driven />
-    <jdbc:embedded-database id="dataSource">
+    <jdbc:embedded-database id="dataSource" type="HSQL">
         <jdbc:script location="classpath:scheme.sql"/>
     </jdbc:embedded-database>
     <security:http auto-config="true">
-        <security:intercept-url pattern = "/**" access="ROLE_USER" />
+        <security:intercept-url pattern = "/**" access="permitAll" />
+        <security:intercept-url pattern = "/admin/**" access="hasRole('ROLE_ADMIN')" />
         <security:form-login
             login-page="/login"
             default-target-url="/"
