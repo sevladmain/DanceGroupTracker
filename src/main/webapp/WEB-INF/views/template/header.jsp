@@ -18,5 +18,6 @@
     <link rel="icon" href="../../favicon.ico">
     <title>Dance Group Tracker</title>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
+    <link href="<c:url value="/resources/css/login-form.css" />" rel="stylesheet">
 </head>
 <body>
