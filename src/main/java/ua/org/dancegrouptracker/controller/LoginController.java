@@ -5,6 +5,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.Locale;
+
 /**
  * Created by SeVlad on 28.02.2017.
  */
@@ -13,6 +15,7 @@ public class LoginController {
     @RequestMapping("/login")
     public String login(@RequestParam(value="error", required = false) String error,
                         @RequestParam(value="logout", required = false) String logout,
+                        Locale locale,
                         Model model){
         if(error == null){
             model.addAttribute("error", "Невірне ім'я користувача або пароль");
