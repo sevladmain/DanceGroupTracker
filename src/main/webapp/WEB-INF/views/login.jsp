@@ -4,6 +4,12 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
+                <c:if test="${not empty msg}">
+                    <div class="alert alert-success" role="alert">${msg}</div>
+                </c:if>
+                <c:if test="${not empty error}">
+                    <div class="alert alert-danger" role="alert">${error}</div>
+                </c:if>
                 <div class="panel-heading">
                     <div class="row">
                         <div class="col-xs-6">
@@ -18,7 +24,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form id="login-form" action="<c:url value='/j_spring_security_check' />" method="post" role="form" style="display: block;">
+                            <form id="login-form" action="<c:url value='/j_spring_security_check'' />" method="post" role="form" style="display: block;">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control" placeholder="Username" value="">
                                 </div>

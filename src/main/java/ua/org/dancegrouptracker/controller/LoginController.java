@@ -23,7 +23,7 @@ public class LoginController {
                         @RequestParam(value="logout", required = false) String logout,
                         Locale locale,
                         Model model){
-        if(error == null){
+        if(error != null){
             String message = messageSource.getMessage("LogginController.WrongEmailOrPassword", null, locale);
             model.addAttribute("error", message);
         }
