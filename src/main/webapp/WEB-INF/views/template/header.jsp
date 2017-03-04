@@ -21,3 +21,13 @@
     <link href="<c:url value="/resources/css/login-form.css" />" rel="stylesheet">
 </head>
 <body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="<c:url value="/?locale=ua" />">UA</a></li>
+                <li><a href="<c:url value="/?locale=en" />">EN</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
