@@ -37,8 +37,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="/?locale=ua">UA</a></li>
-                <li><a href="/?locale=en">EN</a></li>
+                <li><a href="?locale=ua">UA</a></li>
+                <li><a href="?locale=en">EN</a></li>
             </ul>
         </div>
     </div>
