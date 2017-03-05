@@ -1,7 +1,7 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
-<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <html>
 <head>
     <meta charset="utf-8">
@@ -10,6 +10,11 @@
     <title>Dance Group Tracker</title>
     <link href="<c:url value="/resources/css/bootstrap.min.css" />" rel="stylesheet">
     <link href="<c:url value="/resources/css/login-form.css" />" rel="stylesheet">
+    <script>
+        function formSubmit() {
+            document.getElementById("logoutForm").submit();
+        }
+    </script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -23,15 +28,17 @@
                         </a>
                     </sec:authorize>
                     <sec:authorize access="isAuthenticated()">
-                        <a href="<c:url value='/j_spring_security_logout'/>">
-                            <spring:message code="login.logout.label"/>
-                        </a>
+                        <c:url value='/j_spring_security_logout' var="logoutUrl"/>
+                        <a href="javascript:formSubmit()"> <spring:message code="login.logout.label"/></a>
+                        <form action="${logoutUrl}" id="logoutForm" method="post">
+                            <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        </form>
                     </sec:authorize>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<c:url value="/?locale=ua" />">UA</a></li>
-                <li><a href="<c:url value="/?locale=en" />">EN</a></li>
+                <li><a href="/?locale=ua">UA</a></li>
+                <li><a href="/?locale=en">EN</a></li>
             </ul>
         </div>
     </div>
