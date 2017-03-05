@@ -12,6 +12,7 @@
     <jdbc:embedded-database id="dataSource" type="HSQL">
         <jdbc:script location="classpath:scheme.sql"/>
     </jdbc:embedded-database>
+    <security:http pattern="/favicon.ico" security="none" />
     <security:http use-expressions="true">
         <security:intercept-url pattern = "/admin/**" access="hasRole('ROLE_ADMIN')" />
         <security:intercept-url pattern = "/login" access="permitAll" />
