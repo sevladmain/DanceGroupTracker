@@ -24,11 +24,11 @@ public class LoginController {
                         Locale locale,
                         Model model){
         if(error != null){
-            String message = messageSource.getMessage("LogginController.WrongEmailOrPassword", null, locale);
+            String message = messageSource.getMessage("LoginController.WrongEmailOrPassword", null, locale);
             model.addAttribute("error", message);
         }
         if(logout != null){
-            String message = messageSource.getMessage("LogginController.SuccessfullyLogout", null, locale);
+            String message = messageSource.getMessage("LoginController.SuccessfullyLogout", null, locale);
             model.addAttribute("msg", message);
         }
         return "login";
