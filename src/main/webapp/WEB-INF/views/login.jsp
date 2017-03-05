@@ -33,7 +33,7 @@
                                 </div>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name='_spring_security_remember_me' id="remember">
-                                    <label for="remember"> Remember Me</label>
+                                    <label for="remember"><spring:message code="login.RememberMe.label"/></label>
                                 </div>
                                 <div class="form-group">
                                     <div class="row">
