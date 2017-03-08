@@ -1,5 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.User;
 
@@ -11,6 +13,13 @@ import java.util.List;
 // TODO: perform test on HUserDao
 // TODO: implement methods in HUserDao
 public class HUserDao implements UserDao {
+    @Autowired
+    SessionFactory sessionFactory;
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
     @Override
     public User read(String id) {
         return null;
