@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.model;
 
 import java.sql.Date;
+import java.util.List;
 
 /**
  * Created by SeVlad on 08.03.2017.
@@ -10,7 +11,7 @@ public class User {
 
     private String password;
 
-    private String userRole;
+    private Authorities authority;
 
     private boolean enabled;
 
@@ -34,12 +35,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUserRole() {
-        return userRole;
+    public Authorities getAuthority() {
+        return authority;
     }
 
-    public void setUserRole(String userRole) {
-        this.userRole = userRole;
+    public void setAuthority(Authorities authority) {
+        this.authority = authority;
     }
 
     public boolean isEnabled() {
