@@ -1,7 +1,6 @@
 package ua.org.dancegrouptracker.model;
 
 import java.sql.Date;
-import java.util.List;
 
 /**
  * Created by SeVlad on 08.03.2017.
