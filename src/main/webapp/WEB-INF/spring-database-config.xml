@@ -12,4 +12,5 @@
             </props>
         </property>
     </bean>
+    <bean id="userDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDao"/>
 </beans>
