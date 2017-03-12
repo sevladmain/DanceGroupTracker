@@ -13,4 +13,4 @@ create table roles (
       role_id INTEGER not null,
       constraint fk_authorities_users foreign key(username) references users(username),
       constraint fk_authorities_roles foreign key(role_id) references roles(id));
-      create unique index ix_auth_username on roles (username,role_id);
+      create unique index ix_auth_username on userroles (username,role_id);

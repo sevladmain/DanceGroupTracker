@@ -13,8 +13,11 @@ import ua.org.dancegrouptracker.model.Roles;
 import ua.org.dancegrouptracker.model.User;
 
 import java.sql.Date;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by SeVlad on 12.03.2017.
@@ -44,9 +47,19 @@ public class HUserDaoTest {
     @Test
     @Transactional
     @Rollback
-    public void saveUser(){
+    public void sameUsernameAfterSaveUser(){
         String username =  userDao.saveOrUpdate(user);
         assertEquals(username, user.getUsername());
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void checkIfUserWasSaved(){
+        userDao.saveOrUpdate(user);
+        List<User> users = userDao.getAll();
+        assertThat("Wrong size of Saved User Array", users.size(), equalTo(1));
+        assertEquals("Saved users not equal", user, users.get(0));
     }
 
     @Test
