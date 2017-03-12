@@ -14,7 +14,7 @@ import java.util.List;
 // TODO: implement methods in HUserDao
 public class HUserDao implements UserDao {
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     public void setSessionFactory(SessionFactory sessionFactory) {
         this.sessionFactory = sessionFactory;
