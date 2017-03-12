@@ -17,7 +17,8 @@ public class User {
     private String password;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "")
+    @JoinTable(name = "userroles", joinColumns = @JoinColumn (name = "username"),
+                inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Roles authority;
 
     @Column(name = "enabled")
