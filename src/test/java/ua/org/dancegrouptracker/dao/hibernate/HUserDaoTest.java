@@ -56,4 +56,10 @@ public class HUserDaoTest {
         assertEquals(username, user.getUsername());
     }
 
+    @Test
+    public void readUser(){
+        User userDouble = userDao.read(user.getUsername());
+        assertEquals(userDouble, user);
+    }
+
 }
