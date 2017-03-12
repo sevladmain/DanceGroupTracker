@@ -1,48 +1,40 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
-import ua.org.dancegrouptracker.model.Authorities;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
+import ua.org.dancegrouptracker.dao.UserDao;
+import ua.org.dancegrouptracker.model.UserRole;
 import ua.org.dancegrouptracker.model.User;
 
 import java.sql.Date;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.eq;
-import static org.mockito.Matchers.same;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by SeVlad on 12.03.2017.
  */
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-database-config-test.xml")
 public class HUserDaoTest {
-    @Mock
-    private SessionFactory sessionFactory;
 
-    @Mock
-    private Session session;
+    @Autowired
+    UserDao userDao;
 
-    private HUserDao userDao;
     private User user;
 
     @Before
     public void setUp() throws Exception {
-        when(sessionFactory.getCurrentSession()).thenReturn(session);
-        userDao = new HUserDao();
-        userDao.setSessionFactory(sessionFactory);
-        Authorities authorities = new Authorities();
-        authorities.setRoleName("USR_TEST");
+        UserRole userRole = new UserRole();
+        userRole.setRoleName("USR_TEST");
         user = new User();
         user.setUsername("testUser");
-        user.setAuthority(authorities);
+        user.setAuthority(userRole);
         user.setDateRegister(Date.valueOf("2017-01-01"));
         user.setEmail("test@test.org");
         user.setEnabled(true);
@@ -50,9 +42,10 @@ public class HUserDaoTest {
     }
 
     @Test
+    @Transactional
+    @Rollback
     public void saveUser(){
         String username =  userDao.saveOrUpdate(user);
-        verify(session, times(1)).save(user);
         assertEquals(username, user.getUsername());
     }
 

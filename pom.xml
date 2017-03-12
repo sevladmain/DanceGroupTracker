@@ -8,6 +8,11 @@
     <artifactId>tracker</artifactId>
     <version>1.0</version>
     <build>
+        <testResources>
+            <testResource>
+                <directory>src/main/webapp/WEB-INF</directory>
+            </testResource>
+        </testResources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

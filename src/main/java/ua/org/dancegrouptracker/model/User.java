@@ -1,21 +1,31 @@
 package ua.org.dancegrouptracker.model;
 
+import javax.persistence.*;
 import java.sql.Date;
 
 /**
  * Created by SeVlad on 08.03.2017.
  */
+@Entity
+@Table(name="user")
 public class User {
+    @Id
+    @Column(name = "username")
     private String username;
 
+    @Column(name = "password")
     private String password;
 
-    private Authorities authority;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private UserRole authority;
 
+    @Column(name = "enabled")
     private boolean enabled;
 
+    @Column(name = "email")
     private String email;
 
+    @Column(name = "dateregister")
     private Date dateRegister;
 
     public String getUsername() {
@@ -34,11 +44,11 @@ public class User {
         this.password = password;
     }
 
-    public Authorities getAuthority() {
+    public UserRole getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Authorities authority) {
+    public void setAuthority(UserRole authority) {
         this.authority = authority;
     }
 
