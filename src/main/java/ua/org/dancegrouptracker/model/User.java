@@ -7,7 +7,7 @@ import java.sql.Date;
  * Created by SeVlad on 08.03.2017.
  */
 @Entity
-@Table(name="user")
+@Table(name="users")
 public class User {
     @Id
     @Column(name = "username")
