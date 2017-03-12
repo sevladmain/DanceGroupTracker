@@ -66,6 +66,32 @@ public class User {
         this.dateRegister = dateRegister;
     }
 
-    // TODO: Database support
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (enabled != user.enabled) return false;
+        if (username != null ? !username.equals(user.username) : user.username != null) return false;
+        if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (authority != null ? !authority.equals(user.authority) : user.authority != null) return false;
+        if (email != null ? !email.equals(user.email) : user.email != null) return false;
+        return dateRegister != null ? dateRegister.equals(user.dateRegister) : user.dateRegister == null;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = username != null ? username.hashCode() : 0;
+        result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (authority != null ? authority.hashCode() : 0);
+        result = 31 * result + (enabled ? 1 : 0);
+        result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (dateRegister != null ? dateRegister.hashCode() : 0);
+        return result;
+    }
+// TODO: Database support
     // TODO: password encoding
 }
