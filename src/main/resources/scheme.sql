@@ -3,11 +3,11 @@ create table users(
       password varchar_ignorecase(50) not null,
       enabled boolean not null);
 
-  create table userRole (
+  create table roles (
       username varchar_ignorecase(50) not null,
       authority varchar_ignorecase(50) not null,
       constraint fk_authorities_users foreign key(username) references users(username));
-      create unique index ix_auth_username on userRole (username,authority);
+      create unique index ix_auth_username on roles (username,authority);
 
 insert into users values('user', 'pwd', true);
-insert into userRole values('user', 'ROLE_ADMIN');
+insert into roles values('user', 'ROLE_ADMIN');

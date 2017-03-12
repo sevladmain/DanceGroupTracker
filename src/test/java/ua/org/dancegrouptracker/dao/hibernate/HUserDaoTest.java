@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
-import ua.org.dancegrouptracker.model.UserRole;
+import ua.org.dancegrouptracker.model.Roles;
 import ua.org.dancegrouptracker.model.User;
 
 import java.sql.Date;
@@ -30,11 +30,11 @@ public class HUserDaoTest {
 
     @Before
     public void setUp() throws Exception {
-        UserRole userRole = new UserRole();
-        userRole.setRoleName("USR_TEST");
+        Roles roles = new Roles();
+        roles.setRoleName("USR_TEST");
         user = new User();
         user.setUsername("testUser");
-        user.setAuthority(userRole);
+        user.setAuthority(roles);
         user.setDateRegister(Date.valueOf("2017-01-01"));
         user.setEmail("test@test.org");
         user.setEnabled(true);

@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "roles")
-public class UserRole {
+public class Roles {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,10 +37,10 @@ public class UserRole {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        UserRole userRole = (UserRole) o;
+        Roles roles = (Roles) o;
 
-        if (id != userRole.id) return false;
-        return roleName != null ? roleName.equals(userRole.roleName) : userRole.roleName == null;
+        if (id != roles.id) return false;
+        return roleName != null ? roleName.equals(roles.roleName) : roles.roleName == null;
 
     }
 
