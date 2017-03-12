@@ -2,9 +2,11 @@ package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.User;
 
+import javax.persistence.Transient;
 import java.util.List;
 
 /**
@@ -21,21 +23,26 @@ public class HUserDao implements UserDao {
     }
 
     @Override
+    @Transactional
     public User read(String id) {
         return null;
     }
 
     @Override
-    public String saveOrUpdate(User transientObject) {
-        return null;
+    @Transactional
+    public String saveOrUpdate(User user) {
+        sessionFactory.getCurrentSession().save(user);
+        return user.getUsername();
     }
 
     @Override
+    @Transactional
     public void delete(User persistentObject) {
 
     }
 
     @Override
+    @Transactional
     public List<User> getAll() {
         return null;
     }

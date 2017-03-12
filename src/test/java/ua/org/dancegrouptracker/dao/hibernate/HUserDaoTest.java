@@ -13,6 +13,8 @@ import ua.org.dancegrouptracker.model.User;
 import java.sql.Date;
 
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.same;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -49,8 +51,9 @@ public class HUserDaoTest {
 
     @Test
     public void saveUser(){
-        userDao.saveOrUpdate(user);
+        String username =  userDao.saveOrUpdate(user);
         verify(session, times(1)).save(user);
+        assertEquals(username, user.getUsername());
     }
 
 }
