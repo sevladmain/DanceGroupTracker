@@ -65,6 +65,8 @@ public class HUserDaoTest {
     }
 
     @Test
+    @Transactional
+    @Rollback
     public void readUser(){
         User userDouble = userDao.read(user.getUsername());
         assertEquals(userDouble, user);

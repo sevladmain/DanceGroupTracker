@@ -6,8 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.User;
 
-import javax.persistence.Query;
-import javax.persistence.Transient;
+import org.hibernate.query.Query;
 import java.util.List;
 
 /**
@@ -26,7 +25,13 @@ public class HUserDao implements UserDao {
     @Override
     @Transactional
     public User read(String id) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery("select s from User s where s.username = :id");
+        query.setParameter("id", id);
+        User user = (User) query.uniqueResult();
+        if (user == null){
+            return new User();
+        }
+        return user;
     }
 
     @Override
