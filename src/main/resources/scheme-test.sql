@@ -1,16 +1,23 @@
-create table users(
-      username varchar_ignorecase(50) not null primary key,
-      password varchar_ignorecase(50) not null,
-      enabled boolean not null,
-      dateregister DATE not null);
+CREATE TABLE users (
+  username     VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
+  password     VARCHAR_IGNORECASE(50) NOT NULL,
+  enabled      BOOLEAN                NOT NULL,
+  email        VARCHAR_IGNORECASE(50) NOT NULL,
+  dateregister DATE                   NOT NULL
+);
 
-create table roles (
-      id INTEGER not null primary key,
-      role_name varchar_ignorecase(50) not null);
+CREATE TABLE roles (
+  id        INTEGER                NOT NULL PRIMARY KEY,
+  role_name VARCHAR_IGNORECASE(50) NOT NULL
+);
 
-  create table userroles (
-      username varchar_ignorecase(50) not null,
-      role_id INTEGER not null,
-      constraint fk_authorities_users foreign key(username) references users(username),
-      constraint fk_authorities_roles foreign key(role_id) references roles(id));
-      create unique index ix_auth_username on userroles (username,role_id);
+CREATE TABLE userroles (
+  username VARCHAR_IGNORECASE(50) NOT NULL,
+  role_id  INTEGER                NOT NULL,
+  CONSTRAINT fk_authorities_users FOREIGN KEY (username) REFERENCES users (username),
+  CONSTRAINT fk_authorities_roles FOREIGN KEY (role_id) REFERENCES roles (id)
+);
+CREATE UNIQUE INDEX ix_auth_username
+  ON userroles (username, role_id);
+
+INSERT INTO roles VALUES (1, 'ROLE_USER');

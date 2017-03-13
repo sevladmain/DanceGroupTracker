@@ -35,7 +35,8 @@ public class HUserDaoTest {
     @Before
     public void setUp() throws Exception {
         Roles roles = new Roles();
-        roles.setRoleName("USR_TEST");
+        roles.setId(1l);
+        roles.setRoleName("ROLE_USER");
         user = new User();
         user.setUsername("testUser");
         user.setAuthority(roles);
