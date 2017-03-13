@@ -104,6 +104,18 @@ public class User {
         result = 31 * result + (dateRegister != null ? dateRegister.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", authority=" + authority +
+                ", enabled=" + enabled +
+                ", email='" + email + '\'' +
+                ", dateRegister=" + dateRegister +
+                '}';
+    }
 // TODO: Database support
     // TODO: password encoding
 }
