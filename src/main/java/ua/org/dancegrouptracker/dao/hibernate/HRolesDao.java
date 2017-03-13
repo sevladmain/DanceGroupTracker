@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.org.dancegrouptracker.dao.RolesDao;
 import ua.org.dancegrouptracker.model.Roles;
@@ -13,16 +14,17 @@ import java.util.List;
 public class HRolesDao implements RolesDao {
 
     @Autowired
-    SessionFactory sessionFactory;
+    private SessionFactory sessionFactory;
 
     @Override
-    public Roles read(String id) {
+    public Roles read(Long id) {
         return null;
     }
 
     @Override
-    public String saveOrUpdate(Roles transientObject) {
-        return null;
+    public Long saveOrUpdate(Roles role) {
+        sessionFactory.getCurrentSession().saveOrUpdate(role);
+        return role.getId();
     }
 
     @Override
@@ -32,6 +34,7 @@ public class HRolesDao implements RolesDao {
 
     @Override
     public List<Roles> getAll() {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery("select r from Roles r");
+        return query.getResultList();
     }
 }

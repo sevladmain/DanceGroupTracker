@@ -45,4 +45,12 @@ public class HRolesDaoTest {
         assertEquals(roles.get(0), existingRole);
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void saveNewRole(){
+        rolesDao.saveOrUpdate(newRole);
+        assertThat(newRole.getId(), equalTo(2L));
+    }
+
 }
