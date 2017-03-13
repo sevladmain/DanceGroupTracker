@@ -21,6 +21,7 @@ import static org.junit.Assert.assertThat;
 
 /**
  * Created by SeVlad on 12.03.2017.
+ * Tests for HUserDao class
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = "classpath:spring-database-config-test.xml")
