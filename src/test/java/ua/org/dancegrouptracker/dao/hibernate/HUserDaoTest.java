@@ -57,7 +57,8 @@ public class HUserDaoTest {
     @Test
     @Transactional
     @Rollback
-    public void checkIfUserWasSaved(){
+    public void checkUpdatingUser(){
+        user.setUsername("user1");
         userDao.saveOrUpdate(user);
         List<User> users = userDao.getAll();
         assertThat("Wrong size of Saved User Array", users.size(), equalTo(1));
@@ -67,9 +68,45 @@ public class HUserDaoTest {
     @Test
     @Transactional
     @Rollback
-    public void readUser(){
+    public void checkIfUserWasSaved(){
+        userDao.saveOrUpdate(user);
+        List<User> users = userDao.getAll();
+        assertThat("Wrong size of Saved User Array", users.size(), equalTo(2));
+        assertEquals("Saved users not equal", user, users.get(0));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testGetAllUsers(){
+        List<User> users = userDao.getAll();
+        assertThat("Users not 1", users.size(), equalTo(1));
+        assertThat("Users not the same as in DB", users.get(0).getUsername(), equalTo("user1"));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void readSavedUser(){
+        userDao.saveOrUpdate(user);
         User userDouble = userDao.read(user.getUsername());
         assertEquals(userDouble, user);
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void readExistingUser(){
+        User userDouble = userDao.read("user1");
+        assertThat(userDouble.getEmail(), equalTo("test@t.t"));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void readNotExistingUser(){
+        User userDouble = userDao.read("bla-bla-bla");
+        assertEquals(userDouble, new User());
     }
 
 }

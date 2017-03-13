@@ -37,7 +37,7 @@ public class HUserDao implements UserDao {
     @Override
     @Transactional
     public String saveOrUpdate(User user) {
-        sessionFactory.getCurrentSession().save(user);
+        sessionFactory.getCurrentSession().saveOrUpdate(user);
         return user.getUsername();
     }
 
