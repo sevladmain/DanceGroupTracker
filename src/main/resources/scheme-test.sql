@@ -25,5 +25,6 @@ CREATE UNIQUE INDEX ix_auth_username
   ON userroles (username, role_id);
 
 INSERT INTO roles (role_name) VALUES ('ROLE_USER');
+INSERT INTO roles (role_name) VALUES ('ROLE_MANAGER');
 INSERT INTO users VALUES ('user1', 'user1', TRUE, 'test@t.t', '2010-01-01');
 INSERT INTO userroles VALUES ('user1', 1);

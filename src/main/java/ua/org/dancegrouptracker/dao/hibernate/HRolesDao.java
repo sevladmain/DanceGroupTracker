@@ -29,7 +29,9 @@ public class HRolesDao implements RolesDao {
 
     @Override
     public void delete(Roles role) {
-        sessionFactory.getCurrentSession().delete(role);
+        if(read(role.getId()) != null) {
+            sessionFactory.getCurrentSession().delete(role);
+        }
     }
 
     @Override

@@ -41,7 +41,7 @@ public class HRolesDaoTest {
     @Rollback
     public void checkIfOnlyOneRolesInDB(){
         List<Roles> roles = rolesDao.getAll();
-        assertThat(roles.size(), equalTo(1));
+        assertThat(roles.size(), equalTo(2));
         assertEquals(roles.get(0), existingRole);
     }
 
@@ -50,7 +50,7 @@ public class HRolesDaoTest {
     @Rollback
     public void saveNewRole(){
         rolesDao.saveOrUpdate(newRole);
-        assertThat(newRole.getId(), equalTo(2L));
+        assertThat(newRole.getId(), equalTo(3L));
     }
 
     @Test
@@ -60,24 +60,32 @@ public class HRolesDaoTest {
         newRole.setId(existingRole.getId());
         rolesDao.saveOrUpdate(newRole);
         List<Roles> roles = rolesDao.getAll();
-        assertThat(roles.size(), equalTo(1));
+        assertThat(roles.size(), equalTo(2));
         assertThat(roles.get(0), equalTo(newRole));
     }
 
     @Test
     @Transactional
     @Rollback
+    public void readRoleFromDb(){
+        Roles role = rolesDao.read(1L);
+        assertThat("Readed and existing Roles should be equal", role, equalTo(existingRole));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
     public void deleteRoleTest(){
-        newRole.setId(2L);
+        newRole.setId(3L);
         rolesDao.delete(newRole);
         List<Roles> roles = rolesDao.getAll();
         assertThat("Roles should not change if delete non existing Role from DB",
-                roles.size(), equalTo(1));
+                roles.size(), equalTo(2));
 
-        rolesDao.delete(roles.get(0));
+        rolesDao.delete(roles.get(1));
         roles = rolesDao.getAll();
         assertThat("Roles should be zero if deleted only one existing Role",
-                roles.size(), equalTo(0));
+                roles.size(), equalTo(1));
     }
 
 }
