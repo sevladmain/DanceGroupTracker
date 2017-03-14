@@ -18,7 +18,7 @@ public class HRolesDao implements RolesDao {
 
     @Override
     public Roles read(Long id) {
-        return null;
+        return sessionFactory.getCurrentSession().get(Roles.class, id);
     }
 
     @Override
@@ -28,8 +28,8 @@ public class HRolesDao implements RolesDao {
     }
 
     @Override
-    public void delete(Roles persistentObject) {
-
+    public void delete(Roles role) {
+        sessionFactory.getCurrentSession().delete(role);
     }
 
     @Override

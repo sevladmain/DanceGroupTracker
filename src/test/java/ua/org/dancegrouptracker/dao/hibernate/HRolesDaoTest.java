@@ -64,4 +64,20 @@ public class HRolesDaoTest {
         assertThat(roles.get(0), equalTo(newRole));
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void deleteRoleTest(){
+        newRole.setId(2L);
+        rolesDao.delete(newRole);
+        List<Roles> roles = rolesDao.getAll();
+        assertThat("Roles should not change if delete non existing Role from DB",
+                roles.size(), equalTo(1));
+
+        rolesDao.delete(roles.get(0));
+        roles = rolesDao.getAll();
+        assertThat("Roles should be zero if deleted only one existing Role",
+                roles.size(), equalTo(0));
+    }
+
 }

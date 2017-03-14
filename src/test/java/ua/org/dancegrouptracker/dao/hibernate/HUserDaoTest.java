@@ -106,7 +106,7 @@ public class HUserDaoTest {
     @Rollback
     public void readNotExistingUser(){
         User userDouble = userDao.read("bla-bla-bla");
-        assertEquals(userDouble, new User());
+        assertEquals(null, userDouble);
     }
 
     @Test
@@ -119,5 +119,4 @@ public class HUserDaoTest {
         users = userDao.getAll();
         assertThat(users.size(), equalTo(0));
     }
-
 }

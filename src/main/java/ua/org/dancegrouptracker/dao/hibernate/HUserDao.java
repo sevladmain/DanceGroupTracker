@@ -25,13 +25,14 @@ public class HUserDao implements UserDao {
     @Override
     @Transactional
     public User read(String id) {
-        Query query = sessionFactory.getCurrentSession().createQuery("select s from User s where s.username = :id");
+        /*Query query = sessionFactory.getCurrentSession().createQuery("select s from User s where s.username = :id");
         query.setParameter("id", id);
         User user = (User) query.uniqueResult();
         if (user == null){
             return new User();
         }
-        return user;
+        return user;*/
+        return sessionFactory.getCurrentSession().get(User.class, id);
     }
 
     @Override
