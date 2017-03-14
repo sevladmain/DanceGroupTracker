@@ -53,4 +53,15 @@ public class HRolesDaoTest {
         assertThat(newRole.getId(), equalTo(2L));
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void saveExistingRole(){
+        newRole.setId(existingRole.getId());
+        rolesDao.saveOrUpdate(newRole);
+        List<Roles> roles = rolesDao.getAll();
+        assertThat(roles.size(), equalTo(1));
+        assertThat(roles.get(0), equalTo(newRole));
+    }
+
 }
