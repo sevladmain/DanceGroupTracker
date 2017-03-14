@@ -43,8 +43,8 @@ public class HUserDao implements UserDao {
 
     @Override
     @Transactional
-    public void delete(User persistentObject) {
-
+    public void delete(User user) {
+        sessionFactory.getCurrentSession().delete(user);
     }
 
     @Override
