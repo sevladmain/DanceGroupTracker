@@ -5,6 +5,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,8 +15,6 @@ import ua.org.dancegrouptracker.services.RolesService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;
-import java.sql.Date;
-import java.time.LocalDateTime;
 import java.util.Locale;
 
 /**
@@ -46,11 +45,14 @@ public class LoginController {
             String message = messageSource.getMessage("LoginController.SuccessfullyLogout", null, locale);
             model.addAttribute("msg", message);
         }
+        User user = new User();
+        model.addAttribute("user", user);
         return "login";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@Valid User user, BindingResult result, Model model){
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
+                               Model model){
         if(result.hasErrors()){
             return "login";
         }

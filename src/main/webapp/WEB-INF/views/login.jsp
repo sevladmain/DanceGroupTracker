@@ -69,21 +69,21 @@
                             <form:form id="register-form" action="${registerURL}" modelAttribute="user"
                                        method="post" role="form" style="display: none;">
                                 <div class="form-group">
-                                    <form:input type="text" path="username" id="username" tabindex="1"
+                                    <input type="text" path="username" id="username" tabindex="1"
                                            class="form-control" placeholder="Username" value=""><br/>
                                     <div class="alert-danger">
                                         <form:errors path="username"></form:errors>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <form:input type="email" path="email" id="email" tabindex="1" class="form-control"
+                                    <input type="email" path="email" id="email" tabindex="1" class="form-control"
                                            placeholder="Email Address" value="">
                                     <div class="alert-danger">
                                         <form:errors path="email"></form:errors>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <form:input type="password" path="password" id="password" tabindex="2"
+                                    <input type="password" path="password" id="password" tabindex="2"
                                            class="form-control" placeholder="Password">
                                     <div class="alert-danger">
                                         <form:errors path="password"></form:errors>
