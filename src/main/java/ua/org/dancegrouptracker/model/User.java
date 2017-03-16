@@ -1,6 +1,11 @@
 package ua.org.dancegrouptracker.model;
 
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.sql.Date;
 
 /**
@@ -9,10 +14,17 @@ import java.sql.Date;
 @Entity
 @Table(name="users")
 public class User {
+
+    @NotBlank
+    @Size(min=4, max=15)
+    @Pattern(regexp="\\w{8,}$")
     @Id
     @Column(name = "username")
     private String username;
 
+    @NotBlank
+    @Size(min=8, max=15)
+    @Pattern(regexp = "^\\S+$")
     @Column(name = "password")
     private String password;
 
@@ -24,6 +36,7 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Email(message="Email.user.email")
     @Column(name = "email")
     private String email;
 
