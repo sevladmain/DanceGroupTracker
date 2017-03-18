@@ -29,7 +29,6 @@
         </bean>
     </mvc:interceptors>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-    <bean id="myBeansValidator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
-    <mvc:annotation-driven validator="myBeansValidator"/>
+    <mvc:annotation-driven />
     <import resource="spring-database-config.xml"/>
 </beans>

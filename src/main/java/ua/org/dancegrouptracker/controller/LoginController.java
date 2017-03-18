@@ -34,6 +34,30 @@ public class LoginController {
     @Autowired
     private RolesService rolesService;
 
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
+
+    public UserService getUserService() {
+        return userService;
+    }
+
+    public RolesService getRolesService() {
+        return rolesService;
+    }
+
+    public void setMessageSource(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
+
+    public void setUserService(UserService userService) {
+        this.userService = userService;
+    }
+
+    public void setRolesService(RolesService rolesService) {
+        this.rolesService = rolesService;
+    }
+
     @RequestMapping("/login")
     public String login(@RequestParam(value="error", required = false) String error,
                         @RequestParam(value="logout", required = false) String logout,
@@ -48,7 +72,6 @@ public class LoginController {
             model.addAttribute("msg", message);
         }
         User user = new User();
-        user.setUsername("us");
         model.addAttribute("user", user);
         model.addAttribute("isRegister", false);
         return "login";
