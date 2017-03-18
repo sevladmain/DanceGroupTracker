@@ -17,7 +17,7 @@ public class User {
 
     @NotBlank
     @Size(min=4, max=15)
-    @Pattern(regexp="\\w{8,}$")
+    @Pattern(regexp="\\w{4,}$")
     @Id
     @Column(name = "username")
     private String username;
@@ -36,6 +36,7 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
+    //TODO: Implement own ValidEmail check not Hibernate
     @Email(message="Email.user.email")
     @Column(name = "email")
     private String email;

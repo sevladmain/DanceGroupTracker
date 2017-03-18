@@ -5,10 +5,12 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.request.WebRequest;
 import ua.org.dancegrouptracker.model.Roles;
 import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.services.RolesService;
@@ -46,14 +48,16 @@ public class LoginController {
             model.addAttribute("msg", message);
         }
         User user = new User();
+        user.setUsername("us");
         model.addAttribute("user", user);
+        model.addAttribute("isRegister", false);
         return "login";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
-    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result,
-                               Model model){
+    public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model ){
         if(result.hasErrors()){
+            model.addAttribute("isRegister", true);
             return "login";
         }
 

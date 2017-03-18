@@ -8,6 +8,16 @@
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-login">
+                <c:choose>
+                    <c:when test="${not isRegister}">
+                        <c:set var="displayLogin" value="display: block;"/>
+                        <c:set var="displayRegister" value="display: none;"/>
+                    </c:when>
+                    <c:otherwise>
+                        <c:set var="displayRegister" value="display: block;"/>
+                        <c:set var="displayLogin" value="display: none;"/>
+                    </c:otherwise>
+                </c:choose>
                 <c:if test="${not empty msg}">
                     <div class="alert alert-success" role="alert">${msg}</div>
                 </c:if>
@@ -30,7 +40,7 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <form id="login-form" action="${loginURL}" method="post" role="form"
-                                  style="display: block;">
+                                    style="${displayLogin}">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
                                            placeholder="Username" value="">
@@ -67,41 +77,41 @@
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             </form>
                             <form:form id="register-form" action="${registerURL}" modelAttribute="user"
-                                       method="post" role="form" style="display: none;">
-                                <div class="form-group">
-                                    <input type="text" path="username" id="username" tabindex="1"
-                                           class="form-control" placeholder="Username" value=""><br/>
-                                    <div class="alert-danger">
-                                        <form:errors path="username"></form:errors>
+                                       method="post" role="form"  style="${displayRegister}">
+                            <div class="form-group">
+                                <form:input type="text" path="username" id="username" tabindex="1"
+                                            class="form-control" placeholder="Username" value=""/><br/>
+                                <div class="alert-danger">
+                                    <form:errors path="username"></form:errors>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:input type="email" path="email" id="email" tabindex="1" class="form-control"
+                                            placeholder="Email Address" value=""/>
+                                <div class="alert-danger">
+                                    <form:errors path="email"></form:errors>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <form:input type="password" path="password" id="password" tabindex="2"
+                                            class="form-control" placeholder="Password"/>
+                                <div class="alert-danger">
+                                    <form:errors path="password"></form:errors>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
+                                       class="form-control" placeholder="Confirm Password"/>
+                            </div>
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-sm-6 col-sm-offset-3">
+                                        <input type="submit" name="register-submit" id="register-submit"
+                                               tabindex="4" class="form-control btn btn-register"
+                                               value="Register Now"/>
                                     </div>
                                 </div>
-                                <div class="form-group">
-                                    <input type="email" path="email" id="email" tabindex="1" class="form-control"
-                                           placeholder="Email Address" value="">
-                                    <div class="alert-danger">
-                                        <form:errors path="email"></form:errors>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" path="password" id="password" tabindex="2"
-                                           class="form-control" placeholder="Password">
-                                    <div class="alert-danger">
-                                        <form:errors path="password"></form:errors>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                           class="form-control" placeholder="Confirm Password">
-                                </div>
-                                <div class="form-group">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-sm-offset-3">
-                                            <input type="submit" name="register-submit" id="register-submit"
-                                                   tabindex="4" class="form-control btn btn-register"
-                                                   value="Register Now">
-                                        </div>
-                                    </div>
-                                </div>
+                            </div>
                             </form:form>
                         </div>
                     </div>
