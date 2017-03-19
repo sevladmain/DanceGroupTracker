@@ -38,26 +38,6 @@ public class LoginController {
         return messageSource;
     }
 
-    public UserService getUserService() {
-        return userService;
-    }
-
-    public RolesService getRolesService() {
-        return rolesService;
-    }
-
-    public void setMessageSource(MessageSource messageSource) {
-        this.messageSource = messageSource;
-    }
-
-    public void setUserService(UserService userService) {
-        this.userService = userService;
-    }
-
-    public void setRolesService(RolesService rolesService) {
-        this.rolesService = rolesService;
-    }
-
     @RequestMapping("/login")
     public String login(@RequestParam(value="error", required = false) String error,
                         @RequestParam(value="logout", required = false) String logout,
