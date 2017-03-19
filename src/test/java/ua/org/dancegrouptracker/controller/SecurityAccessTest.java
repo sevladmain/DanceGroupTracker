@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-mvc-config.xml"})
 @WebAppConfiguration
-public class LoginControllerTest {
+public class SecurityAccessTest {
 
     @Autowired
     private WebApplicationContext context;
