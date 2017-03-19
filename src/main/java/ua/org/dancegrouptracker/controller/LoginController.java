@@ -38,7 +38,7 @@ public class LoginController {
         return messageSource;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping(value="/login")
     public String login(@RequestParam(value="error", required = false) String error,
                         @RequestParam(value="logout", required = false) String logout,
                         Locale locale,
