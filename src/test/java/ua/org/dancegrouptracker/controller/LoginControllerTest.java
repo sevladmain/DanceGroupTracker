@@ -9,6 +9,7 @@ import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,11 +30,11 @@ import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyObject;
 import static org.mockito.Matchers.notNull;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verifyNoMoreInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
@@ -85,6 +86,31 @@ public class LoginControllerTest {
                 .andExpect(model().attributeExists("msg"))
                 .andExpect(model().attributeDoesNotExist("error"))
                 .andExpect(view().name("login"));
+        verifyNoMoreInteractions(userService);
+    }
+
+    @Test
+    public void whenUserErrorThenShouldBeAMessage() throws Exception{
+        mockMvc.perform(get("/login").param("error", "error"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("error"))
+                .andExpect(model().attributeDoesNotExist("logout"))
+                .andExpect(view().name("login"));
+        verifyNoMoreInteractions(userService);
+    }
+
+    @Test
+    public void whenIncorrectUserThenDoNotRegister() throws Exception{
+        User user = new User();
+        user.setUsername("sa");
+        user.setPassword("sa");
+        user.setEmail("1@");
+        mockMvc.perform(post("/register").requestAttr("user", user))
+               .andExpect(status().isOk())
+                .andDo(print())
+                .andExpect(model().attributeHasFieldErrors("username", "email", "password"))
+                .andExpect(view().name("login"))
+                .andExpect(model().attribute("isRegister", is(true)));
         verifyNoMoreInteractions(userService);
     }
 }
