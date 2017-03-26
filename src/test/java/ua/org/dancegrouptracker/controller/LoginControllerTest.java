@@ -1,9 +1,11 @@
 package ua.org.dancegrouptracker.controller;
 
+import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -16,6 +18,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.servlet.view.InternalResourceView;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
@@ -25,6 +29,7 @@ import ua.org.dancegrouptracker.services.UserService;
 
 import java.util.Locale;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
@@ -105,12 +110,11 @@ public class LoginControllerTest {
         user.setUsername("sa");
         user.setPassword("sa");
         user.setEmail("1@");
-        mockMvc.perform(post("/register").requestAttr("user", user))
-               .andExpect(status().isOk())
-                .andDo(print())
-                .andExpect(model().attributeHasFieldErrors("username", "email", "password"))
-                .andExpect(view().name("login"))
-                .andExpect(model().attribute("isRegister", is(true)));
+        BindingResult mockBindingResult = mock(BindingResult.class);
+        when(mockBindingResult.hasErrors()).thenReturn(true);
+        Model mockModel = mock(Model.class);
+        String result = controller.registerUser(user, mockBindingResult, mockModel);
+        assertThat(result, is(equalTo("login")));
         verifyNoMoreInteractions(userService);
     }
 }
