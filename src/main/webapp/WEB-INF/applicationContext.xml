@@ -8,37 +8,44 @@
         http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
         http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
-    <tx:annotation-driven />
-    <jdbc:embedded-database id="dataSource" type="HSQL">
-        <jdbc:script location="classpath:scheme.sql"/>
-    </jdbc:embedded-database>
-    <security:http pattern="/favicon.ico" security="none" />
+    <tx:annotation-driven/>
+    <security:http pattern="/favicon.ico" security="none"/>
     <security:http use-expressions="true">
-        <security:intercept-url pattern = "/admin/**" access="hasRole('ROLE_ADMIN')" />
-        <security:intercept-url pattern = "/login" access="permitAll" />
-        <security:intercept-url pattern = "/register" access="permitAll" />
-        <security:intercept-url pattern = "/" access="permitAll" />
-        <security:intercept-url pattern = "/resources/**" access="permitAll" />
-        <security:intercept-url pattern = "/**" access="denyAll" />
+        <security:intercept-url pattern="/admin/**" access="hasRole('ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/login" access="permitAll"/>
+        <security:intercept-url pattern="/register" access="permitAll"/>
+        <security:intercept-url pattern="/" access="permitAll"/>
+        <security:intercept-url pattern="/resources/**" access="permitAll"/>
+        <security:intercept-url pattern="/**" access="denyAll"/>
         <security:form-login
-            login-page="/login"
-            default-target-url="/"
-            authentication-failure-url="/login?error"
-            username-parameter="username"
-            password-parameter="password"
-            login-processing-url="/j_spring_security_check"
+                login-page="/login"
+                default-target-url="/"
+                authentication-failure-url="/login?error"
+                username-parameter="username"
+                password-parameter="password"
+                login-processing-url="/j_spring_security_check"
         />
         <security:logout
-                logout-url = "/j_spring_security_logout"
+                logout-url="/j_spring_security_logout"
                 logout-success-url="/login?logout"/>
-        <security:access-denied-handler error-page="/" />
+        <security:access-denied-handler error-page="/"/>
     </security:http>
     <security:authentication-manager>
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
                                         authorities-by-username-query="SELECT u.username, r.role_name From Userroles ur, Roles r, Users u  WHERE u.username = ? and u.username = ur.username and ur.role_id=r.id"
-                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?" />
+                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?"/>
         </security:authentication-provider>
     </security:authentication-manager>
     <security:global-method-security secured-annotations="enabled"></security:global-method-security>
+    <beans profile="prod">
+        <jdbc:embedded-database id="dataSource" type="HSQL">
+            <jdbc:script location="classpath:scheme.sql"/>
+        </jdbc:embedded-database>
+    </beans>
+    <beans profile="test">
+        <jdbc:embedded-database id="dataSource" type="HSQL">
+            <jdbc:script location="classpath:scheme-test.sql"/>
+        </jdbc:embedded-database>
+    </beans>
 </beans>
