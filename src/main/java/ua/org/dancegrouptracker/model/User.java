@@ -31,7 +31,7 @@ public class User {
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "userroles", joinColumns = @JoinColumn (name = "username"),
                 inverseJoinColumns = @JoinColumn(name = "role_id"))
-    private Roles authority;
+    private Role authority;
 
     @Column(name = "enabled")
     private boolean enabled;
@@ -60,11 +60,11 @@ public class User {
         this.password = password;
     }
 
-    public Roles getAuthority() {
+    public Role getAuthority() {
         return authority;
     }
 
-    public void setAuthority(Roles authority) {
+    public void setAuthority(Role authority) {
         this.authority = authority;
     }
 

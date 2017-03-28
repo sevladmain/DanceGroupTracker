@@ -5,15 +5,13 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.context.request.WebRequest;
-import ua.org.dancegrouptracker.model.Roles;
+import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
-import ua.org.dancegrouptracker.services.RolesService;
+import ua.org.dancegrouptracker.services.RoleService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;
@@ -32,7 +30,7 @@ public class LoginController {
     private UserService userService;
 
     @Autowired
-    private RolesService rolesService;
+    private RoleService roleService;
 
     public MessageSource getMessageSource() {
         return messageSource;
@@ -64,7 +62,7 @@ public class LoginController {
             return "login";
         }
 
-        Roles role = rolesService.getRolesById(2L);
+        Role role = roleService.getRolesById(2L);
         user.setAuthority(role);
         user.setEnabled(true);
 

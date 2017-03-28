@@ -4,34 +4,34 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import ua.org.dancegrouptracker.dao.RolesDao;
-import ua.org.dancegrouptracker.model.Roles;
+import ua.org.dancegrouptracker.dao.RoleDao;
+import ua.org.dancegrouptracker.model.Role;
 
 import java.util.List;
 
 /**
  * Created by SeVlad on 13.03.2017.
  */
-public class HRolesDao implements RolesDao {
+public class HRoleDao implements RoleDao {
 
     @Autowired
     private SessionFactory sessionFactory;
 
     @Override
-    public Roles read(Long id) {
-        return sessionFactory.getCurrentSession().get(Roles.class, id);
+    public Role read(Long id) {
+        return sessionFactory.getCurrentSession().get(Role.class, id);
     }
 
     @Override
     @Transactional
-    public Long saveOrUpdate(Roles role) {
+    public Long saveOrUpdate(Role role) {
         sessionFactory.getCurrentSession().saveOrUpdate(role);
         return role.getId();
     }
 
     @Override
     @Transactional
-    public void delete(Roles role) {
+    public void delete(Role role) {
         if(read(role.getId()) != null) {
             sessionFactory.getCurrentSession().delete(role);
         }
@@ -39,16 +39,16 @@ public class HRolesDao implements RolesDao {
 
     @Override
     @Transactional
-    public List<Roles> getAll() {
-        Query query = sessionFactory.getCurrentSession().createQuery("select r from Roles r");
+    public List<Role> getAll() {
+        Query query = sessionFactory.getCurrentSession().createQuery("select r from Role r");
         return query.getResultList();
     }
 
     @Override
     @Transactional
-    public Roles getRolesByName(String name) {
-        Query query = sessionFactory.getCurrentSession().createQuery("select r from Roles r where r.roleName=:name");
+    public Role getRolesByName(String name) {
+        Query query = sessionFactory.getCurrentSession().createQuery("select r from Role r where r.roleName=:name");
         query.setParameter("name", name);
-        return (Roles) query.uniqueResult();
+        return (Role) query.uniqueResult();
     }
 }

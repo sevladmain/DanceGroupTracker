@@ -12,10 +12,10 @@
         </property>
     </bean>
     <bean id="userDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDao"/>
-    <bean id="rolesDao" class="ua.org.dancegrouptracker.dao.hibernate.HRolesDao"/>
+    <bean id="roleDao" class="ua.org.dancegrouptracker.dao.hibernate.HRoleDao"/>
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
-    <bean id = "rolesService" class="ua.org.dancegrouptracker.services.RolesService"/>
+    <bean id = "rolesService" class="ua.org.dancegrouptracker.services.RoleService"/>
     <bean id = "userService" class="ua.org.dancegrouptracker.services.UserService" />
 </beans>

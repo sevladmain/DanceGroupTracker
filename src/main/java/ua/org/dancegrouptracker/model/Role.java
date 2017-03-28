@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "roles")
-public class Roles {
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -37,10 +37,10 @@ public class Roles {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Roles roles = (Roles) o;
+        Role role = (Role) o;
 
-        if (id != roles.id) return false;
-        return roleName != null ? roleName.equals(roles.roleName) : roles.roleName == null;
+        if (id != role.id) return false;
+        return roleName != null ? roleName.equals(role.roleName) : role.roleName == null;
 
     }
 
@@ -53,7 +53,7 @@ public class Roles {
 
     @Override
     public String toString() {
-        return "Roles{" +
+        return "Role{" +
                 "id=" + id +
                 ", roleName='" + roleName + '\'' +
                 '}';

@@ -9,8 +9,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import ua.org.dancegrouptracker.dao.RolesDao;
-import ua.org.dancegrouptracker.model.Roles;
+import ua.org.dancegrouptracker.dao.RoleDao;
+import ua.org.dancegrouptracker.model.Role;
 
 import java.util.List;
 
@@ -23,16 +23,16 @@ import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-database-config.xml"})
 @ActiveProfiles("test")
-public class HRolesDaoTest {
+public class HRoleDaoTest {
     @Autowired
-    private RolesDao rolesDao;
+    private RoleDao roleDao;
 
-    private Roles newRole, existingRole;
+    private Role newRole, existingRole;
 
     @Before
     public void setUp() throws Exception {
-        newRole = new Roles();
-        existingRole = new Roles();
+        newRole = new Role();
+        existingRole = new Role();
         existingRole.setId(1l);
         existingRole.setRoleName("ROLE_USER");
         newRole.setRoleName("ROLE_ADMIN");
@@ -42,7 +42,7 @@ public class HRolesDaoTest {
     @Transactional
     @Rollback
     public void checkIfOnlyOneRolesInDB(){
-        List<Roles> roles = rolesDao.getAll();
+        List<Role> roles = roleDao.getAll();
         assertThat(roles.size(), equalTo(2));
         assertEquals(roles.get(0), existingRole);
     }
@@ -51,7 +51,7 @@ public class HRolesDaoTest {
     @Transactional
     @Rollback
     public void saveNewRole(){
-        rolesDao.saveOrUpdate(newRole);
+        roleDao.saveOrUpdate(newRole);
         assertThat(newRole.getId(), equalTo(3L));
     }
 
@@ -60,8 +60,8 @@ public class HRolesDaoTest {
     @Rollback
     public void saveExistingRole(){
         newRole.setId(existingRole.getId());
-        rolesDao.saveOrUpdate(newRole);
-        List<Roles> roles = rolesDao.getAll();
+        roleDao.saveOrUpdate(newRole);
+        List<Role> roles = roleDao.getAll();
         assertThat(roles.size(), equalTo(2));
         assertThat(roles.get(0), equalTo(newRole));
     }
@@ -70,8 +70,8 @@ public class HRolesDaoTest {
     @Transactional
     @Rollback
     public void readRoleFromDb(){
-        Roles role = rolesDao.read(1L);
-        assertThat("Readed and existing Roles should be equal", role, equalTo(existingRole));
+        Role role = roleDao.read(1L);
+        assertThat("Readed and existing Role should be equal", role, equalTo(existingRole));
     }
 
     @Test
@@ -79,14 +79,14 @@ public class HRolesDaoTest {
     @Rollback
     public void deleteRoleTest(){
         newRole.setId(3L);
-        rolesDao.delete(newRole);
-        List<Roles> roles = rolesDao.getAll();
-        assertThat("Roles should not change if delete non existing Role from DB",
+        roleDao.delete(newRole);
+        List<Role> roles = roleDao.getAll();
+        assertThat("Role should not change if delete non existing Role from DB",
                 roles.size(), equalTo(2));
 
-        rolesDao.delete(roles.get(1));
-        roles = rolesDao.getAll();
-        assertThat("Roles should be zero if deleted only one existing Role",
+        roleDao.delete(roles.get(1));
+        roles = roleDao.getAll();
+        assertThat("Role should be zero if deleted only one existing Role",
                 roles.size(), equalTo(1));
     }
 
@@ -94,7 +94,7 @@ public class HRolesDaoTest {
     @Transactional
     @Rollback
     public void findRolesByName(){
-        Roles roleUser = rolesDao.getRolesByName("ROLE_USER");
+        Role roleUser = roleDao.getRolesByName("ROLE_USER");
         assertThat(roleUser, equalTo(existingRole));
     }
 
