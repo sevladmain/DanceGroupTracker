@@ -10,12 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.org.dancegrouptracker.model.Role;
+import ua.org.dancegrouptracker.model.RoleType;
 import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.services.RoleService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;
 import java.util.Locale;
+
+import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
 
 /**
  * Created by SeVlad on 28.02.2017.
@@ -62,7 +65,7 @@ public class LoginController {
             return "login";
         }
 
-        Role role = roleService.getRolesByName("ROLE_USER");
+        Role role = roleService.getRolesByName(ROLE_USER.name());
         user.setAuthority(role);
         user.setEnabled(true);
 

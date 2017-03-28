@@ -16,6 +16,8 @@ import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
+import static ua.org.dancegrouptracker.model.RoleType.ROLE_ADMIN;
+import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
 
 /**
  * Created by SeVlad on 13.03.2017.
@@ -34,8 +36,8 @@ public class HRoleDaoTest {
         newRole = new Role();
         existingRole = new Role();
         existingRole.setId(1l);
-        existingRole.setRoleName("ROLE_USER");
-        newRole.setRoleName("ROLE_ADMIN");
+        existingRole.setRoleName(ROLE_USER.name());
+        newRole.setRoleName(ROLE_ADMIN.name());
     }
 
     @Test
@@ -94,7 +96,7 @@ public class HRoleDaoTest {
     @Transactional
     @Rollback
     public void findRolesByName(){
-        Role roleUser = roleDao.getRolesByName("ROLE_USER");
+        Role roleUser = roleDao.getRolesByName(ROLE_USER.name());
         assertThat(roleUser, equalTo(existingRole));
     }
 

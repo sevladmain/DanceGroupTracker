@@ -19,6 +19,7 @@ import java.util.List;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
+import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
 
 /**
  * Created by SeVlad on 12.03.2017.
@@ -38,7 +39,7 @@ public class HUserDaoTest {
     public void setUp() throws Exception {
         Role role = new Role();
         role.setId(1l);
-        role.setRoleName("ROLE_USER");
+        role.setRoleName(ROLE_USER.name());
         user = new User();
         user.setUsername("testUser");
         user.setAuthority(role);
