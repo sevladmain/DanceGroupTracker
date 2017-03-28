@@ -37,4 +37,9 @@ public class RolesService {
     public void deleteRoles(Roles roles){
         rolesDao.delete(roles);
     }
+
+    @Transactional
+    public Roles getRolesByName(String name){
+        return rolesDao.getRolesByName(name);
+    }
 }
