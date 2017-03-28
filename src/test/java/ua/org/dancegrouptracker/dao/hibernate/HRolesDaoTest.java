@@ -90,4 +90,12 @@ public class HRolesDaoTest {
                 roles.size(), equalTo(1));
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void findRolesByName(){
+        Roles roleUser = rolesDao.getRolesByName("ROLE_USER");
+        assertThat(roleUser, equalTo(existingRole));
+    }
+
 }
