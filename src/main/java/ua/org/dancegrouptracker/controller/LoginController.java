@@ -16,6 +16,7 @@ import ua.org.dancegrouptracker.services.RoleService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.Locale;
 
 import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
@@ -68,6 +69,7 @@ public class LoginController {
         Role role = roleService.getRolesByName(ROLE_USER.name());
         user.setAuthority(role);
         user.setEnabled(true);
+        user.setDateRegister(LocalDate.now());
 
         if(userService.getUserByUsername(user.getUsername()) != null){
             result.rejectValue("username", "DuplicateKey.user.username");

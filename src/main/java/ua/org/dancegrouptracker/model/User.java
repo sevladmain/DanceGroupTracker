@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import java.sql.Date;
+import java.time.LocalDate;
 
 /**
  * Created by SeVlad on 08.03.2017.
@@ -42,7 +43,7 @@ public class User {
     private String email;
 
     @Column(name = "dateregister")
-    private Date dateRegister;
+    private LocalDate dateRegister;
 
     public String getUsername() {
         return username;
@@ -84,11 +85,11 @@ public class User {
         this.email = email;
     }
 
-    public Date getDateRegister() {
+    public LocalDate getDateRegister() {
         return dateRegister;
     }
 
-    public void setDateRegister(Date dateRegister) {
+    public void setDateRegister(LocalDate dateRegister) {
         this.dateRegister = dateRegister;
     }
 

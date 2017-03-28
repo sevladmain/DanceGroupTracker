@@ -16,7 +16,9 @@ import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.services.UserService;
 
 import static org.hamcrest.core.Is.is;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
@@ -24,6 +26,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
 
 /**
  * Created by SeVlad on 18.03.2017.
@@ -64,12 +67,17 @@ public class SecurityAccessTest {
     }
 
     @Test
-    public void whenIncorrectUserThenDoNotRegister() throws Exception{
+    public void whenAnonymousUserCanRegister() throws Exception{
+        User user = new User();
+        user.setUsername("test");
         mockMvc.perform(post("/register")
+                .param("username", "test")
+                .param("password", "testtest")
+                .param("email", "test@test.test")
                 .with(csrf())
                 .with(anonymous()))
-                .andExpect(status().isOk());
-        verifyNoMoreInteractions(userService);
+                .andExpect(status().isOk())
+                .andExpect(view().name("/"));
     }
 
 }

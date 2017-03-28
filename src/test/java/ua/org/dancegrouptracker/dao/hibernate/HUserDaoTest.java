@@ -14,6 +14,7 @@ import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -43,7 +44,7 @@ public class HUserDaoTest {
         user = new User();
         user.setUsername("testUser");
         user.setAuthority(role);
-        user.setDateRegister(Date.valueOf("2017-01-01"));
+        user.setDateRegister(LocalDate.of(2017, 1, 1));
         user.setEmail("test@test.org");
         user.setEnabled(true);
         user.setPassword("123");
