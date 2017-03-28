@@ -62,7 +62,7 @@ public class LoginController {
             return "login";
         }
 
-        Role role = roleService.getRolesById(2L);
+        Role role = roleService.getRolesByName("ROLE_USER");
         user.setAuthority(role);
         user.setEnabled(true);
 
