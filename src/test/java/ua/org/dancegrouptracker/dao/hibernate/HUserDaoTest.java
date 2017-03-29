@@ -53,7 +53,7 @@ public class HUserDaoTest {
     @Test
     @Transactional
     @Rollback
-    public void sameUsernameAfterSaveUser(){
+    public void sameUsernameAfterSaveUserInLowerCase(){
         String username =  userDao.saveOrUpdate(user);
         assertEquals(username, user.getUsername());
     }

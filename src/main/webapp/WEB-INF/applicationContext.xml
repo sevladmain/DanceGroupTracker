@@ -33,8 +33,8 @@
     <security:authentication-manager>
         <security:authentication-provider>
             <security:jdbc-user-service data-source-ref="dataSource"
-                                        authorities-by-username-query="SELECT u.username, r.role_name From Userroles ur, Roles r, Users u  WHERE u.username = ? and u.username = ur.username and ur.role_id=r.id"
-                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE username = ?"/>
+                                        authorities-by-username-query="SELECT u.username, r.role_name From Userroles ur, Roles r, Users u  WHERE lower(u.username) = lower(?) and u.username = ur.username and ur.role_id=r.id"
+                                        users-by-username-query="SELECT username, password, enabled FROM users WHERE lower(username) = lower(?)"/>
         </security:authentication-provider>
     </security:authentication-manager>
     <security:global-method-security secured-annotations="enabled"></security:global-method-security>
