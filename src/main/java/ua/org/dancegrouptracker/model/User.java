@@ -24,10 +24,11 @@ public class User {
     private String username;
 
     @NotBlank
-    @Size(min=8, max=15)
-    @Pattern(regexp = "^\\S+$")
+    //@Size(min=8, max=15)
+    //@Pattern(regexp = "^\\S+$")
     @Column(name = "password")
     private String password;
+    //TODO: add plain text password field
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "userroles", joinColumns = @JoinColumn (name = "username"),

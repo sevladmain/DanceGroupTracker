@@ -18,6 +18,7 @@ public class HRoleDao implements RoleDao {
     private SessionFactory sessionFactory;
 
     @Override
+    @Transactional
     public Role read(Long id) {
         return sessionFactory.getCurrentSession().get(Role.class, id);
     }
@@ -47,7 +48,7 @@ public class HRoleDao implements RoleDao {
     @Override
     @Transactional
     public Role getRolesByName(String name) {
-        Query query = sessionFactory.getCurrentSession().createQuery("select r from Role r where r.roleName=:name");
+        Query query = sessionFactory.getCurrentSession().createQuery("from Role r where r.roleName=:name");
         query.setParameter("name", name);
         return (Role) query.uniqueResult();
     }
