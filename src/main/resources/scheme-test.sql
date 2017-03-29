@@ -1,6 +1,6 @@
 CREATE TABLE users (
   username     VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
-  password     VARCHAR_IGNORECASE(50) NOT NULL,
+  password     VARCHAR(100) NOT NULL,
   enabled      BOOLEAN                NOT NULL,
   email        VARCHAR_IGNORECASE(50) NOT NULL,
   dateregister DATE                   NOT NULL
