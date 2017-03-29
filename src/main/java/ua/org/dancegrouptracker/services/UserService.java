@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.User;
@@ -14,6 +15,9 @@ public class UserService {
     @Autowired
     private UserDao userDao;
 
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }
@@ -25,6 +29,7 @@ public class UserService {
 
     @Transactional
     public String saveOrUpdateUser(User user){
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userDao.saveOrUpdate(user);
     }
 
