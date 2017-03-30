@@ -24,10 +24,12 @@ public class User {
     private String username;
 
     @NotBlank
-    //@Size(min=8, max=15)
-    //@Pattern(regexp = "^\\S+$")
-    @Column(name = "password")
+    @Size(min=8, max=15)
+    @Pattern(regexp = "^\\S+$")
     private String password;
+
+    @Column(name = "password")
+    private String encodedPassword;
     //TODO: add plain text password field
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
@@ -94,6 +96,14 @@ public class User {
         this.dateRegister = dateRegister;
     }
 
+    public String getEncodedPassword() {
+        return encodedPassword;
+    }
+
+    public void setEncodedPassword(String encodedPassword) {
+        this.encodedPassword = encodedPassword;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -104,6 +114,8 @@ public class User {
         if (enabled != user.enabled) return false;
         if (username != null ? !username.equals(user.username) : user.username != null) return false;
         if (password != null ? !password.equals(user.password) : user.password != null) return false;
+        if (encodedPassword != null ? !encodedPassword.equals(user.encodedPassword) : user.encodedPassword != null)
+            return false;
         if (authority != null ? !authority.equals(user.authority) : user.authority != null) return false;
         if (email != null ? !email.equals(user.email) : user.email != null) return false;
         return dateRegister != null ? dateRegister.equals(user.dateRegister) : user.dateRegister == null;
@@ -114,6 +126,7 @@ public class User {
     public int hashCode() {
         int result = username != null ? username.hashCode() : 0;
         result = 31 * result + (password != null ? password.hashCode() : 0);
+        result = 31 * result + (encodedPassword != null ? encodedPassword.hashCode() : 0);
         result = 31 * result + (authority != null ? authority.hashCode() : 0);
         result = 31 * result + (enabled ? 1 : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -126,6 +139,7 @@ public class User {
         return "User{" +
                 "username='" + username + '\'' +
                 ", password='" + password + '\'' +
+                ", encodedPassword='" + encodedPassword + '\'' +
                 ", authority=" + authority +
                 ", enabled=" + enabled +
                 ", email='" + email + '\'' +
