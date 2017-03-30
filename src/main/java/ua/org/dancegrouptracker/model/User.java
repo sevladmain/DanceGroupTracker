@@ -26,6 +26,7 @@ public class User {
     @NotBlank
     @Size(min=8, max=15)
     @Pattern(regexp = "^\\S+$")
+    @Transient
     private String password;
 
     @Column(name = "password")

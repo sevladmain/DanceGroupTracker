@@ -29,7 +29,10 @@ public class UserService {
 
     @Transactional
     public String saveOrUpdateUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        String password = user.getPassword();
+        if( password != null){
+            user.setEncodedPassword(passwordEncoder.encode(password));
+        }
         return userDao.saveOrUpdate(user);
     }
 
