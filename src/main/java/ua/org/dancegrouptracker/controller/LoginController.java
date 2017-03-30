@@ -73,6 +73,7 @@ public class LoginController {
 
         if(userService.getUserByUsername(user.getUsername()) != null){
             result.rejectValue("username", "DuplicateKey.user.username");
+            model.addAttribute("isRegister", true);
             return "login";
         }
         userService.saveOrUpdateUser(user);

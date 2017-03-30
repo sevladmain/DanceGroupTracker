@@ -47,7 +47,7 @@ public class HUserDaoTest {
         user.setDateRegister(LocalDate.of(2017, 1, 1));
         user.setEmail("test@test.org");
         user.setEnabled(true);
-        user.setPassword("123");
+        user.setEncodedPassword("123");
     }
 
     @Test

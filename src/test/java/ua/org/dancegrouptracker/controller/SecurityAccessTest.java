@@ -77,7 +77,7 @@ public class SecurityAccessTest {
                 .with(csrf())
                 .with(anonymous()))
                 .andExpect(status().isOk())
-                .andExpect(view().name("/"));
+                .andExpect(view().name("home"));
     }
 
 }
