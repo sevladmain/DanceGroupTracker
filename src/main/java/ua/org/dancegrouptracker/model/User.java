@@ -42,7 +42,12 @@ public class User {
     private boolean enabled;
 
     //TODO: Implement own ValidEmail check not Hibernate
-    @Email(message="Email.user.email")
+    //@Email(message="Email.user.email")
+    @Pattern(regexp = "\\A(?=[a-z0-9@.!#$%&'*+/=?^_`{|}~-]{6,254}\\z)\n" +
+            " (?=[a-z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@)\n" +
+            " [a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*\n" +
+            "@ (?:(?=[a-z0-9-]{1,63}\\.)[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+\n" +
+            "  (?=[a-z0-9-]{1,63}\\z)[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\z", message = "Email.user.email")
     @Column(name = "email")
     private String email;
 
