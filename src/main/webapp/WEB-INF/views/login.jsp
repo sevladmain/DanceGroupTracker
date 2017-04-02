@@ -4,6 +4,7 @@
 <spring:url value="/j_spring_security_check" var="loginURL"/>
 <spring:url value="/register" var="registerURL"/>
 <spring:url value="/recover" var="recoverPassURL"/>
+<%--TODO: add JS password checking code--%>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
