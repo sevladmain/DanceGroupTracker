@@ -24,6 +24,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class UserValidationTest {
     @Parameterized.Parameters(name = "{index}: u={0}, em={1}, pas={2}, er={3}, mes={4}")
     public static Collection<Object[]> data() {
+        //TODO: add user validation test for other choices
         //username, email, password, expectedErrors, templateError
         return Arrays.asList(new Object[][]{
                 {"testtest", "test@test", "password123", 1, "Email.user.email"},

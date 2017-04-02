@@ -29,7 +29,6 @@ public class User {
 
     @Column(name = "password")
     private String encodedPassword;
-    //TODO: add plain text password field
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @JoinTable(name = "userroles", joinColumns = @JoinColumn (name = "username"),
@@ -39,7 +38,6 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-    //TODO: Implement own ValidEmail check not Hibernate
     //@Email(message="Email.user.email")
     @Pattern(regexp = "(?=[a-z0-9@.!#$%&'*+/=?^_`{|}~-]{6,254})(?=[a-z0-9.!#$%&'*+/=?^_`{|}~-]{1,64}@)[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:(?=[a-z0-9-]{1,63}\\.)[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+(?=[a-z0-9-]{1,63})[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message = "Email.user.email")
     @Column(name = "email")
@@ -146,6 +144,4 @@ public class User {
                 ", dateRegister=" + dateRegister +
                 '}';
     }
-// TODO: Database support
-    // TODO: password encoding
 }

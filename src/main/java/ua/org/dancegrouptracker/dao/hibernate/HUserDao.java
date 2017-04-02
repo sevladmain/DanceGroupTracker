@@ -12,8 +12,7 @@ import java.util.List;
 /**
  * Created by SeVlad on 08.03.2017.
  */
-// TODO: perform test on HUserDao
-// TODO: implement methods in HUserDao
+
 public class HUserDao implements UserDao {
     @Autowired
     private SessionFactory sessionFactory;
