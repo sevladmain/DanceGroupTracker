@@ -1,0 +1,84 @@
+package ua.org.dancegrouptracker.model;
+
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.junit.runners.Parameterized;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Set;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.MatcherAssert.assertThat;
+
+/**
+ * Created by SeVlad on 02.04.2017.
+ */
+@RunWith(Parameterized.class)
+public class UserEmailParametrizedTest {
+    @Parameterized.Parameters(name = "{index}: emailTemplate = {0} and number of errors is {1}")
+    public static Collection<Object[]> data(){
+        //username, email, password, expectedErrors, templateError
+        return Arrays.asList(new Object[][]{
+                {"testtest", "test@test", "password123", 1, "Email.user.email"},
+                {"testtest", "test@", "password123", 1, "Email.user.email"},
+                {"testtest", "test", "password123", 1, "Email.user.email"},
+                {"testtest", "test@test.org", "password123", 0, ""},
+                {"testtest", "test@test.org.ua", "password123", 0, ""},
+                {"testtest", "test-t.1252@test.org", "password123", 0, ""}
+        });
+    }
+    private String username;
+
+    private String email;
+
+    private String password;
+
+    private int expectedErrors;
+
+    private String templateError;
+
+    private static Validator validator;
+
+    private User testedUser;
+
+
+    public UserEmailParametrizedTest(String username, String email, String password,
+                                     int expectedErrors, String templateError){
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.expectedErrors = expectedErrors;
+        this.templateError = templateError;
+    }
+
+    @BeforeClass
+    public static void setUp(){
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
+    }
+    @Before
+    public void init(){
+        testedUser = new User();
+        testedUser.setUsername(username);
+        testedUser.setEmail(email);
+        testedUser.setPassword(password);
+    }
+
+    @Test
+    public void checkingEmailTemplates(){
+
+        Set<ConstraintViolation<User>> constraintViolationSet = validator.validate(testedUser);
+
+        assertThat(constraintViolationSet.size(), equalTo(expectedErrors));
+        if(expectedErrors > 0) {
+            assertThat(constraintViolationSet.iterator().next().getMessageTemplate(), equalTo(templateError));
+        }
+    }
+}
