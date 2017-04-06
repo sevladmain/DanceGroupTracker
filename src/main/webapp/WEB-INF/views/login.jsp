@@ -4,7 +4,7 @@
 <spring:url value="/j_spring_security_check" var="loginURL"/>
 <spring:url value="/register" var="registerURL"/>
 <spring:url value="/recover" var="recoverPassURL"/>
-<%--TODO: add JS password checking code--%>
+<script type="text/javascript" src="<c:url value='/resources/js/passtest.js'/>"></script>
 <div class="container">
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
@@ -94,7 +94,7 @@
                                 </div>
                             </div>
                             <div class="form-group">
-                                <form:input type="password" path="password" id="password" tabindex="2"
+                                <form:input type="password" path="password" id="register-password" tabindex="2"
                                             class="form-control" placeholder="Password"/>
                                 <div class="alert-danger">
                                     <form:errors path="password"></form:errors>
@@ -102,14 +102,17 @@
                             </div>
                             <div class="form-group">
                                 <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                       class="form-control" placeholder="Confirm Password"/>
+                                       class="form-control" placeholder="Confirm Password"  onkeyup="checkPass(); return false;"/>
+                                <div class="alert-danger" >
+                                    <span id="checkinpassword.errors" style="display:none"><spring:message code="login.PasswordDontMatch.label"/></span>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <div class="row">
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <input type="submit" name="register-submit" id="register-submit"
                                                tabindex="4" class="form-control btn btn-register"
-                                               value="Register Now"/>
+                                               value="Register Now" disabled/>
                                     </div>
                                 </div>
                             </div>
@@ -121,4 +124,5 @@
         </div>
     </div>
 </div>
+
 <%@include file="/WEB-INF/views/template/footer.jsp" %>
