@@ -28,5 +28,6 @@ function checkPass()
         message.style.color = badColor;
         message.innerHTML = "Passwords Do Not Match!"*/
         message.style.display = "";
+        confirmButton.disabled = true;
     }
 }
