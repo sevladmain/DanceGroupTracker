@@ -27,7 +27,7 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
  * Tests for HUserDao class
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-database-config.xml"})
+@ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HUserDaoTest {
 
@@ -47,7 +47,8 @@ public class HUserDaoTest {
         user.setDateRegister(LocalDate.of(2017, 1, 1));
         user.setEmail("test@test.org");
         user.setEnabled(true);
-        user.setEncodedPassword("123");
+        user.setEncodedPassword("12345678");
+        user.setPassword("12345678");
     }
 
     @Test

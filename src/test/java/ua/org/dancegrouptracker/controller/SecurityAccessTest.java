@@ -32,7 +32,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by SeVlad on 18.03.2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = {"classpath:applicationContext.xml", "classpath:spring-mvc-config.xml"})
+@ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-mvc-config.xml"})
 @ActiveProfiles("test")
 @WebAppConfiguration
 public class SecurityAccessTest {
