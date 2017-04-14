@@ -5,6 +5,13 @@ CREATE TABLE users (
   email        VARCHAR_IGNORECASE(50) NOT NULL,
   dateregister DATE                   NOT NULL
 );
+CREATE TABLE userdetails(
+  username  VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
+  firstname VARCHAR(50),
+  lastname  VARCHAR(50),
+  dateofbirth DATE,
+  CONSTRAINT fk_userdetails_user FOREIGN (username) REFERENCES users (username)
+);
 CREATE SEQUENCE role_id
     START WITH 1
     INCREMENT BY 1

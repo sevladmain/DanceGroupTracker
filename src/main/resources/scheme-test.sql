@@ -1,9 +1,16 @@
 CREATE TABLE users (
   username     VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
-  password     VARCHAR(100) NOT NULL,
+  password     VARCHAR(100)           NOT NULL,
   enabled      BOOLEAN                NOT NULL,
   email        VARCHAR_IGNORECASE(50) NOT NULL,
   dateregister DATE                   NOT NULL
+);
+CREATE TABLE userdetails (
+  username    VARCHAR_IGNORECASE(50) NOT NULL PRIMARY KEY,
+  firstname   VARCHAR(50),
+  lastname    VARCHAR(50),
+  dateofbirth DATE,
+  CONSTRAINT fk_userdetails_user FOREIGN (username) REFERENCES users (username)
 );
 CREATE SEQUENCE role_id
     START WITH 1
