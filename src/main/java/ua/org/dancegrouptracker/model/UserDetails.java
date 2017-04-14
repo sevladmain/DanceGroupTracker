@@ -12,24 +12,24 @@ import java.time.LocalDate;
  * Created by SeVlad on 14.04.2017.
  */
 @Entity
-@Table("userdetails")
+@Table(name = "userdetails")
 public class UserDetails {
 
     @Id
-    @Column("username")
+    @Column(name = "username")
     private String username;
 
-    @Column("firstname")
+    @Column(name = "firstname")
     @Size(min=2, max=15)
     @Pattern(regexp="\\w{2,}$")
     private String firstName;
 
-    @Column("lastname")
+    @Column(name = "lastname")
     @Size(min=2, max=15)
     @Pattern(regexp="\\w{2,}$")
     private String lastName;
 
-    @Column("dateofbirth")
+    @Column(name = "dateofbirth")
     private LocalDate dateOfBirth;
 
     public String getUsername() {
