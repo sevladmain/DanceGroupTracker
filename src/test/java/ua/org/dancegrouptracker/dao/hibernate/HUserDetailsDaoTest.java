@@ -83,4 +83,14 @@ public class HUserDetailsDaoTest {
         assertThat("Users not the same as in DB", users.get(0).getUsername(), equalTo("user1"));
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void readSavedUserDetails(){
+        userDetails.setUsername("user1");
+        userDetailsDao.saveOrUpdate(userDetails);
+        UserDetails userDouble = userDetailsDao.read(userDetails.getUsername());
+        assertEquals(userDouble, userDetails);
+    }
+
 }
