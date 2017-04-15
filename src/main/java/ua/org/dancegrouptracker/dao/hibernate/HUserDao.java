@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -37,7 +38,9 @@ public class HUserDao implements UserDao {
     @Override
     @Transactional
     public void delete(User user) {
-        sessionFactory.getCurrentSession().delete(user);
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(user);
+        currentSession.flush();
     }
 
     @Override
