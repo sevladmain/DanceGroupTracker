@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,9 @@ public class HUserDetailsDao implements UserDetailsDao {
     @Override
     @Transactional
     public String saveOrUpdate(UserDetails userDetails) {
-        sessionFactory.getCurrentSession().saveOrUpdate(userDetails);
+        Session session = sessionFactory.getCurrentSession();
+        session.saveOrUpdate(userDetails);
+        session.flush();
         return userDetails.getUsername();
     }
 

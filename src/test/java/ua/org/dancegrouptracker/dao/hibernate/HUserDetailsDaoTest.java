@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDetailsDao;
 import ua.org.dancegrouptracker.model.UserDetails;
 
+import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -64,6 +65,13 @@ public class HUserDetailsDaoTest {
         List<UserDetails> users = userDetailsDao.getAll();
         assertThat("Wrong size of Saved User Array", users.size(), equalTo(1));
         assertEquals("Saved users not equal", userDetails, users.get(0));
+    }
+
+    @Test(expected = PersistenceException.class)
+    @Transactional
+    @Rollback
+    public void whenSaveUserDetailsWithoutUserThenPersistenceException(){
+        userDetailsDao.saveOrUpdate(userDetails);
     }
 
 
