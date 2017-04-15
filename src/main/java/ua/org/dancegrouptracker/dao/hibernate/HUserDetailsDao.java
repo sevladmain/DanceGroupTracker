@@ -1,5 +1,9 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDetailsDao;
 import ua.org.dancegrouptracker.model.UserDetails;
 
@@ -9,23 +13,33 @@ import java.util.List;
  * Created by SeVlad on 14.04.2017.
  */
 public class HUserDetailsDao implements UserDetailsDao {
+
+    @Autowired
+    SessionFactory sessionFactory;
+
     @Override
+    @Transactional
     public UserDetails read(String id) {
         return null;
     }
 
     @Override
+    @Transactional
     public String saveOrUpdate(UserDetails userDetails) {
+        sessionFactory.getCurrentSession().saveOrUpdate(userDetails);
         return userDetails.getUsername();
     }
 
     @Override
+    @Transactional
     public void delete(UserDetails persistentObject) {
 
     }
 
     @Override
+    @Transactional
     public List<UserDetails> getAll() {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery("select ud from UserDetails ud");
+        return query.getResultList();
     }
 }
