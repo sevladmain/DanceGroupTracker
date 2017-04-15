@@ -15,8 +15,8 @@ public class HUserDetailsDao implements UserDetailsDao {
     }
 
     @Override
-    public String saveOrUpdate(UserDetails transientObject) {
-        return null;
+    public String saveOrUpdate(UserDetails userDetails) {
+        return userDetails.getUsername();
     }
 
     @Override
