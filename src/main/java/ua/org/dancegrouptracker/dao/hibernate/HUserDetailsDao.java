@@ -35,8 +35,8 @@ public class HUserDetailsDao implements UserDetailsDao {
 
     @Override
     @Transactional
-    public void delete(UserDetails persistentObject) {
-
+    public void delete(UserDetails userDetails) {
+        sessionFactory.getCurrentSession().delete(userDetails);
     }
 
     @Override

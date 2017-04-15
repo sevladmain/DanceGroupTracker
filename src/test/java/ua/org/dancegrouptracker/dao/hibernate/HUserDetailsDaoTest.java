@@ -101,4 +101,15 @@ public class HUserDetailsDaoTest {
         assertEquals(null, userDouble);
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void deleteUserDetailsTest(){
+        List<UserDetails> users = userDetailsDao.getAll();
+        userDetails = users.get(0);
+        userDetailsDao.delete(userDetails);
+        users = userDetailsDao.getAll();
+        assertThat(users.size(), equalTo(0));
+    }
+
 }
