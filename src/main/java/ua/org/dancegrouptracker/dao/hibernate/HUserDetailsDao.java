@@ -21,7 +21,7 @@ public class HUserDetailsDao implements UserDetailsDao {
     @Override
     @Transactional
     public UserDetails read(String id) {
-        return null;
+        return sessionFactory.getCurrentSession().get(UserDetails.class, id);
     }
 
     @Override
