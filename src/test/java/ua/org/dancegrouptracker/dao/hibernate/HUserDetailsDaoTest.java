@@ -93,4 +93,12 @@ public class HUserDetailsDaoTest {
         assertEquals(userDouble, userDetails);
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void readNotExistingUserDetails(){
+        UserDetails userDouble = userDetailsDao.read("bla-bla-bla");
+        assertEquals(null, userDouble);
+    }
+
 }
