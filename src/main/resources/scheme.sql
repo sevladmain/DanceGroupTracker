@@ -10,7 +10,7 @@ CREATE TABLE userdetails(
   firstname VARCHAR(50),
   lastname  VARCHAR(50),
   dateofbirth DATE,
-  CONSTRAINT fk_userdetails_user FOREIGN (username) REFERENCES users (username)
+  CONSTRAINT fk_userdetails_user FOREIGN KEY (username) REFERENCES users (username)
 );
 CREATE SEQUENCE role_id
     START WITH 1

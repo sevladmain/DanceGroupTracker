@@ -13,7 +13,6 @@ import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 
-import java.sql.Date;
 import java.time.LocalDate;
 import java.util.List;
 
