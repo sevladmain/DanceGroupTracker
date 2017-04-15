@@ -49,14 +49,6 @@ public class HUserDetailsDaoTest {
     }
 
     @Test
-    @Rollback
-    @Transactional
-    public void sameUsernameAfterSaveUserDetailsInLowerCase(){
-        String username =  userDetailsDao.saveOrUpdate(userDetails);
-        assertEquals(username, userDetails.getUsername());
-    }
-
-    @Test
     @Transactional
     @Rollback
     public void checkUpdatingUserDetails(){
