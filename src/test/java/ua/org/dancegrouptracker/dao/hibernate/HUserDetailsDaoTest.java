@@ -74,5 +74,13 @@ public class HUserDetailsDaoTest {
         userDetailsDao.saveOrUpdate(userDetails);
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void testGetAllUsersDetails() {
+        List<UserDetails> users = userDetailsDao.getAll();
+        assertThat("Users not 1", users.size(), equalTo(1));
+        assertThat("Users not the same as in DB", users.get(0).getUsername(), equalTo("user1"));
+    }
 
 }
