@@ -46,6 +46,11 @@ public class User {
     @Column(name = "dateregister")
     private LocalDate dateRegister;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "userdetails", joinColumns = @JoinColumn(name = "username"),
+                inverseJoinColumns = @JoinColumn(name = "username"))
+    private UserDetails userDetails;
+
     public String getUsername() {
         return username;
     }
@@ -100,6 +105,14 @@ public class User {
 
     public void setEncodedPassword(String encodedPassword) {
         this.encodedPassword = encodedPassword;
+    }
+
+    public UserDetails getUserDetails() {
+        return userDetails;
+    }
+
+    public void setUserDetails(UserDetails userDetails) {
+        this.userDetails = userDetails;
     }
 
     @Override
