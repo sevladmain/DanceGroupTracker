@@ -114,12 +114,14 @@ public class HUserDaoTest {
         assertEquals(null, userDouble);
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test()
     @Transactional
     @Rollback
     public void whenDeleteUserThenPersistenceExceptionBecauseOfUserDetailsConstraint(){
         List<User> users = userDao.getAll();
         user = users.get(0);
         userDao.delete(user);
+        users = userDao.getAll();
+        assertThat(users.size(), equalTo(0));
     }
 }
