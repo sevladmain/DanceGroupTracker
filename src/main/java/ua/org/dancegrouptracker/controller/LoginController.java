@@ -2,6 +2,7 @@ package ua.org.dancegrouptracker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -61,6 +62,7 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model ){
+        // TODO: check null pointers
         if(result.hasErrors()){
             model.addAttribute("isRegister", true);
             return "login";
@@ -78,5 +80,16 @@ public class LoginController {
         }
         userService.saveOrUpdateUser(user);
         return "home";
+    }
+
+    @RequestMapping(value = "/userdetails", method = RequestMethod.GET)
+    public String getUserDetailsPage(Model model){
+        String username = SecurityContextHolder
+                                .getContext()
+                                .getAuthentication()
+                                .getName();
+        User currentUser = userService.getUserByUsername(username);
+        model.addAttribute("userdetails", currentUser.getUserDetails());
+        return "userdetails";
     }
 }
