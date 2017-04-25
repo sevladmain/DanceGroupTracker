@@ -23,7 +23,7 @@
             <ul class="nav navbar-nav navbar-left">
                 <sec:authorize access="isAuthenticated()">
                     <li>
-                        <a href="<c:url value='/userdatails' />"><sec:authentication property="principal.username"/></a>
+                        <a href="<c:url value='/userdetails' />"><sec:authentication property="principal.username"/></a>
                     </li>
                 </sec:authorize>
                 <li>

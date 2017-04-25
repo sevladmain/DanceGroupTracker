@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
+import ua.org.dancegrouptracker.model.UserDetails;
 import ua.org.dancegrouptracker.services.RoleService;
 import ua.org.dancegrouptracker.services.UserService;
 
@@ -89,7 +90,11 @@ public class LoginController {
                                 .getAuthentication()
                                 .getName();
         User currentUser = userService.getUserByUsername(username);
-        model.addAttribute("userdetails", currentUser.getUserDetails());
+        UserDetails userDetails = currentUser.getUserDetails();
+        if (userDetails == null){
+            userDetails = new UserDetails();
+        }
+        model.addAttribute("userdetails", userDetails);
         return "userdetails";
     }
 }
