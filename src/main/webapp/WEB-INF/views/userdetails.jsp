@@ -2,10 +2,11 @@
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+
 <div class="container">
     <%--TODO: Add localities--%>
-    <%--TODO: Add URL to send data--%>
-    <form:form id="userdetails-from" action="" modelAttribute="userdetails" method="post">
+    <spring:url value="/updatedetails" var="updateUrl"/>
+    <form:form id="userdetails-from" action="${updateUrl}" modelAttribute="userdetails" method="post">
         <div class="form-group">
             <form:input type="text" path="firstName" id="firstName" tabindex="1"
                         class="form-control" placeholder="First Name" value=""/><br/>
@@ -23,7 +24,7 @@
                 <div class="col-sm-6 col-sm-offset-3">
                     <input type="submit" name="submit-userdetails" id="submit-userdetails"
                            tabindex="4" class="form-control btn btn-register"
-                           value="Change" />
+                           value="Change"/>
                 </div>
             </div>
         </div>
