@@ -14,10 +14,16 @@
         <div class="form-group">
             <form:input type="text" path="firstName" id="firstName" tabindex="1"
                         class="form-control" placeholder="First Name" value=""/><br/>
+            <div class="alert-danger">
+                <form:errors path="firstName"></form:errors>
+            </div>
         </div>
         <div class="form-group">
             <form:input type="text" path="lastName" id="lastName" tabindex="2"
                         class="form-control" placeholder="Last Name" value=""/><br/>
+            <div class="alert-danger">
+                <form:errors path="lastName"></form:errors>
+            </div>
         </div>
         <div class="form-group">
             <form:input type="date" path="dateOfBirth" id="dateOfBirth" tabindex="3"

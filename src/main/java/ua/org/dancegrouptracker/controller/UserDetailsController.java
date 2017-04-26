@@ -36,6 +36,7 @@ public class UserDetailsController {
         UserDetails userDetails = userDetailsService.getUserDetailsByUsername(username);
         if (userDetails == null){
             userDetails = new UserDetails();
+            userDetails.setUsername(username);
         }
         model.addAttribute("userdetails", userDetails);
         return "userdetails";
@@ -44,6 +45,7 @@ public class UserDetailsController {
     @RequestMapping(value = "/updatedetails", method = RequestMethod.POST)
     public String updateUserDetails(@Valid @ModelAttribute("userdetails") UserDetails userDetails,
                                     BindingResult result, Locale locale, Model model){
+        //TODO: Fix Wrong user details Error - maybe should be username field
         if(result.hasErrors()){
             String message = messageSource.getMessage("UserDetailsController.WrongUserDetails", null, locale);
             model.addAttribute("error", message);
