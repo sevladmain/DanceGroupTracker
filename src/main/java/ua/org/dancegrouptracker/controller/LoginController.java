@@ -15,6 +15,7 @@ import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.model.UserDetails;
 import ua.org.dancegrouptracker.services.RoleService;
+import ua.org.dancegrouptracker.services.UserDetailsService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;
@@ -37,6 +38,9 @@ public class LoginController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private UserDetailsService userDetailsService;
 
     public MessageSource getMessageSource() {
         return messageSource;
@@ -89,12 +93,30 @@ public class LoginController {
                                 .getContext()
                                 .getAuthentication()
                                 .getName();
-        User currentUser = userService.getUserByUsername(username);
-        UserDetails userDetails = currentUser.getUserDetails();
+        UserDetails userDetails = userDetailsService.getUserDetailsByUsername(username);
         if (userDetails == null){
             userDetails = new UserDetails();
         }
         model.addAttribute("userdetails", userDetails);
+        return "userdetails";
+    }
+
+    @RequestMapping(value = "/updatedetails", method = RequestMethod.POST)
+    public String updateUserDetails(@Valid @ModelAttribute("userdetails") UserDetails userDetails,
+                                    BindingResult result, Locale locale, Model model){
+        if(result.hasErrors()){
+            String message = messageSource.getMessage("LoginController.WrongUserDetails", null, locale);
+            model.addAttribute("error", message);
+        } else {
+            try {
+                userDetailsService.saveOrUpdateUserDetails(userDetails);
+                String message = messageSource.getMessage("LoginController.UserDetailsSuccessfullySaved", null, locale);
+                model.addAttribute("msg", message);
+            } catch (Exception e){
+                String message = messageSource.getMessage("LoginController.CantSaveUserDetails", null, locale);
+                model.addAttribute("error", message);
+            }
+        }
         return "userdetails";
     }
 }
