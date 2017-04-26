@@ -1,11 +1,15 @@
 <%@include file="/WEB-INF/views/template/header.jsp" %>
 <%@taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
-
+<%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="container">
     <%--TODO: Add localities--%>
     <spring:url value="/updatedetails" var="updateUrl"/>
+    <c:if test="${not empty msg}">
+        <div class="alert alert-success" role="alert">${msg}</div>
+    </c:if>
+    <c:if test="${not empty error}">
+        <div class="alert alert-danger" role="alert">${error}</div>
+    </c:if>
     <form:form id="userdetails-from" action="${updateUrl}" modelAttribute="userdetails" method="post">
         <div class="form-group">
             <form:input type="text" path="firstName" id="firstName" tabindex="1"
