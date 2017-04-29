@@ -4,6 +4,11 @@
 <spring:url value="/j_spring_security_check" var="loginURL"/>
 <spring:url value="/register" var="registerURL"/>
 <spring:url value="/recover" var="recoverPassURL"/>
+<spring:message code="login.username.label" var="usernameLabel"/>
+<spring:message code="login.password.label" var="passwordLabel"/>
+<spring:message code="login.confirmpassword.label" var="confirmPasswordLabel"/>
+<spring:message code="login.email.label" var="emailLabel"/>
+<spring:message code="login.registerNow.label" var="registerNowLabel"/>
 <script type="text/javascript" src="<c:url value='/resources/js/passtest.js'/>"></script>
 <div class="container">
     <div class="row">
@@ -44,11 +49,11 @@
                                     style="${displayLogin}">
                                 <div class="form-group">
                                     <input type="text" name="username" id="username" tabindex="1" class="form-control"
-                                           placeholder="Username" value="">
+                                           placeholder="${usernameLabel}" value="">
                                 </div>
                                 <div class="form-group">
                                     <input type="password" name="password" id="password" tabindex="2"
-                                           class="form-control" placeholder="Password">
+                                           class="form-control" placeholder="${passwordLabel}">
                                 </div>
                                 <div class="form-group text-center">
                                     <input type="checkbox" tabindex="3" class="" name='_spring_security_remember_me'
@@ -81,28 +86,28 @@
                                        method="post" role="form"  style="${displayRegister}">
                             <div class="form-group">
                                 <form:input type="text" path="username" id="username" tabindex="1"
-                                            class="form-control" placeholder="Username" value=""/><br/>
+                                            class="form-control" placeholder="${usernameLabel}" value=""/><br/>
                                 <div class="alert-danger">
                                     <form:errors path="username"></form:errors>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <form:input type="email" path="email" id="email" tabindex="1" class="form-control"
-                                            placeholder="Email Address" value=""/>
+                                            placeholder="${emailLabel}" value=""/>
                                 <div class="alert-danger">
                                     <form:errors path="email"></form:errors>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <form:input type="password" path="password" id="register-password" tabindex="2"
-                                            class="form-control" placeholder="Password"/>
+                                            class="form-control" placeholder="${passwordLabel}"/>
                                 <div class="alert-danger">
                                     <form:errors path="password"></form:errors>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <input type="password" name="confirm-password" id="confirm-password" tabindex="2"
-                                       class="form-control" placeholder="Confirm Password"  onkeyup="checkPass(); return false;"/>
+                                       class="form-control" placeholder="${confirmPasswordLabel}"  onkeyup="checkPass(); return false;"/>
                                 <div class="alert-danger" >
                                     <span id="checkinpassword.errors" style="display:none"><spring:message code="login.PasswordDontMatch.label"/></span>
                                 </div>
@@ -113,7 +118,7 @@
                                     <div class="col-sm-6 col-sm-offset-3">
                                         <input type="submit" name="register-submit" id="register-submit"
                                                tabindex="4" class="form-control btn btn-register"
-                                               value="Register Now" disabled/>
+                                               value="${registerNowLabel}" disabled/>
                                     </div>
                                 </div>
                             </div>
