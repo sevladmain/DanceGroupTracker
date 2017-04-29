@@ -13,6 +13,8 @@ function checkPass()
     var confirmButton = document.getElementById('register-submit');
     if(pass1.value == pass2.value){
         confirmButton.disabled = false;
+        confirmButton.classList.remove('disabled');
+        confirmButton.classList.add('active');
         //The passwords match.
         //Set the color to the good color and inform
         //the user that they have entered the correct password
@@ -28,6 +30,7 @@ function checkPass()
         message.style.color = badColor;
         message.innerHTML = "Passwords Do Not Match!"*/
         message.style.display = "";
-        confirmButton.disabled = true;
+        confirmButton.classList.remove('active');
+        confirmButton.classList.add('disabled');
     }
 }
