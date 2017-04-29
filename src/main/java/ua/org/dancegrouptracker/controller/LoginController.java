@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import ua.org.dancegrouptracker.exceptions.EmailExistsException;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.model.UserDetails;
@@ -64,7 +65,6 @@ public class LoginController {
 
     @RequestMapping(value = "/register", method = RequestMethod.POST)
     public String registerUser(@Valid @ModelAttribute("user") User user, BindingResult result, Model model ){
-        // TODO: check null pointers
         if(result.hasErrors()){
             model.addAttribute("isRegister", true);
             return "login";
@@ -80,7 +80,21 @@ public class LoginController {
             model.addAttribute("isRegister", true);
             return "login";
         }
-        userService.saveOrUpdateUser(user);
+        if(createUserAccount(user) ==  null){
+            result.rejectValue("email", "DuplicateKey.user.email");
+            model.addAttribute("isRegister", true);
+            return "login";
+        }
         return "home";
+    }
+
+    private String createUserAccount(User user) {
+        String username = null;
+        try {
+            username = userService.saveOrUpdateUser(user);
+        } catch(EmailExistsException e){
+            return null;
+        }
+        return username;
     }
 }

@@ -7,4 +7,5 @@ import ua.org.dancegrouptracker.model.User;
  */
 public interface UserDao extends GenericDao<User, String>{
 
+    User getUserByEmail(String email);
 }

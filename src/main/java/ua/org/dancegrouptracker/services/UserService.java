@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
+import ua.org.dancegrouptracker.exceptions.EmailExistsException;
 import ua.org.dancegrouptracker.model.User;
 
 import java.util.List;
@@ -23,26 +24,29 @@ public class UserService {
     }
 
     @Transactional
-    public User getUserByUsername(String username){
+    public User getUserByUsername(String username) {
         return userDao.read(username);
     }
 
     @Transactional
-    public String saveOrUpdateUser(User user){
+    public String saveOrUpdateUser(User user) throws EmailExistsException {
         String password = user.getPassword();
-        if( password != null){
+        if (password != null) {
             user.setEncodedPassword(passwordEncoder.encode(password));
         }
-        return userDao.saveOrUpdate(user);
+        if (userDao.getUserByEmail(user.getEmail()) != null)
+            throw new EmailExistsException();
+        else
+            return userDao.saveOrUpdate(user);
     }
 
     @Transactional
-    public List<User> getAllUsers(){
+    public List<User> getAllUsers() {
         return userDao.getAll();
     }
 
     @Transactional
-    public void deleteUser(User user){
+    public void deleteUser(User user) {
         userDao.delete(user);
     }
 }

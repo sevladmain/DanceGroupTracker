@@ -2,12 +2,12 @@ package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.User;
 
-import org.hibernate.query.Query;
 import java.util.List;
 
 /**
@@ -48,5 +48,12 @@ public class HUserDao implements UserDao {
     public List<User> getAll() {
         Query query = sessionFactory.getCurrentSession().createQuery("select u from User u");
         return query.getResultList();
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        Query query = sessionFactory.getCurrentSession().createQuery("from User u where u.email=:email");
+        query.setParameter("email", email);
+        return (User) query.uniqueResult();
     }
 }
