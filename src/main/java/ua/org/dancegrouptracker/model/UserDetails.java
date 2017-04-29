@@ -1,5 +1,7 @@
 package ua.org.dancegrouptracker.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -30,6 +32,7 @@ public class UserDetails {
     private String lastName;
 
     @Column(name = "dateofbirth")
+    @DateTimeFormat(iso= DateTimeFormat.ISO.DATE)
     private LocalDate dateOfBirth;
 
     public String getUsername() {

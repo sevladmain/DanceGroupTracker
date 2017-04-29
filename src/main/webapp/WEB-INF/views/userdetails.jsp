@@ -11,6 +11,8 @@
         <div class="alert alert-danger" role="alert">${error}</div>
     </c:if>
     <form:form id="userdetails-from" action="${updateUrl}" modelAttribute="userdetails" method="post">
+        <form:input type="hidden" path="username" id="username" tabindex="1"
+                    class="form-control" value="${userdetails.username}"/><br/>
         <div class="form-group">
             <form:input type="text" path="firstName" id="firstName" tabindex="1"
                         class="form-control" placeholder="First Name" value=""/><br/>
@@ -28,6 +30,9 @@
         <div class="form-group">
             <form:input type="date" path="dateOfBirth" id="dateOfBirth" tabindex="3"
                         class="form-control" placeholder="Date of Birth" value=""/><br/>
+            <div class="alert-danger">
+                <form:errors path="dateOfBirth"></form:errors>
+            </div>
         </div>
         <div class="form-group">
             <div class="row">
