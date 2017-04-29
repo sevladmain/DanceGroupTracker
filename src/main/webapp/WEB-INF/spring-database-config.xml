@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="packagesToScan" value="ua.org.dancegrouptracker.model"/>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+            </props>
+        </property>
+    </bean>
+    <bean id="namingStrategy" class="org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl"/>
+    <bean id="userDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDao"/>
+    <bean id="roleDao" class="ua.org.dancegrouptracker.dao.hibernate.HRoleDao"/>
+    <bean id="userDetailsDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDetailsDao" />
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+    <bean id="rolesService" class="ua.org.dancegrouptracker.services.RoleService"/>
+    <bean id="userService" class="ua.org.dancegrouptracker.services.UserService"/>
+    <bean id="userDetailsService" class="ua.org.dancegrouptracker.services.UserDetailsService"/>
+    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+</beans>

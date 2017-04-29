@@ -21,6 +21,11 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
+                <sec:authorize access="isAuthenticated()">
+                    <li>
+                        <a href="<c:url value='/userdetails' />"><sec:authentication property="principal.username"/></a>
+                    </li>
+                </sec:authorize>
                 <li>
                     <sec:authorize access="!isAuthenticated()">
                         <a href="<c:url value='/login'/>">
