@@ -24,5 +24,6 @@
     <bean id="rolesService" class="ua.org.dancegrouptracker.services.RoleService"/>
     <bean id="userService" class="ua.org.dancegrouptracker.services.UserService"/>
     <bean id="userDetailsService" class="ua.org.dancegrouptracker.services.UserDetailsService"/>
+    <bean id="groupService" class="ua.org.dancegrouptracker.services.GroupService"/>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans>
