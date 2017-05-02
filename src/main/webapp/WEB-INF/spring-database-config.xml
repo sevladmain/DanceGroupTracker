@@ -17,6 +17,7 @@
     <bean id="userDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDao"/>
     <bean id="roleDao" class="ua.org.dancegrouptracker.dao.hibernate.HRoleDao"/>
     <bean id="userDetailsDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDetailsDao" />
+    <bean id="groupDao" class="ua.org.dancegrouptracker.dao.hibernate.HGroupDao" />
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
