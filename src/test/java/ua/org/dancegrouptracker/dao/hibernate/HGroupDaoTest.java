@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -7,6 +8,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
+
+import java.time.LocalDate;
 
 import static org.junit.Assert.*;
 
@@ -22,6 +25,12 @@ public class HGroupDaoTest {
 
     private Group group;
 
+    @Before
+    public void setUp() throws Exception {
+        group = new Group();
+        group.setName("TestGroup2");
+        group.setDescription("This is test group2");
+    }
 
 
 }
