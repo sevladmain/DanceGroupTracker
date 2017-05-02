@@ -80,5 +80,14 @@ public class HGroupDaoTest {
         assertThat("Group should be zero if deleted only one existing Group",
                 groups.size(), equalTo(0));
     }
+    @Test
+    @Transactional
+    @Rollback
+    public void findGroupByName(){
+        groupDao.saveOrUpdate(group);
+        List<Group> groupTest = groupDao.getGroupByName("%Group2%");
+        assertThat(groupTest.size(), equalTo(1));
+        assertThat(groupTest.get(0), equalTo(group));
+    }
 
 }

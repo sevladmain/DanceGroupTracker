@@ -19,8 +19,10 @@ public class HGroupDao implements GroupDao {
 
     @Override
     @Transactional
-    public Group getGroupByName(String name) {
-        return null;
+    public List<Group> getGroupByName(String name) {
+        Query query = sessionFactory.getCurrentSession().createQuery("select g from Group g where g.name like :name");
+        query.setParameter("name", name);
+        return query.getResultList();
     }
 
     @Override
