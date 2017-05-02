@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hamcrest.core.IsEqual;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,11 +13,11 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by SeVlad on 02.05.2017.
@@ -67,6 +68,17 @@ public class HGroupDaoTest {
         groupDao.saveOrUpdate(group);
         Group groupDouble = groupDao.read(group.getId());
         assertEquals(groupDouble, group);
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void deleteExistingGroupTest(){
+        List<Group> groups = groupDao.getAll();
+        groupDao.delete(groups.get(0));
+        groups = groupDao.getAll();
+        assertThat("Group should be zero if deleted only one existing Group",
+                groups.size(), equalTo(0));
     }
 
 }

@@ -39,7 +39,7 @@ public class HGroupDao implements GroupDao {
     @Override
     @Transactional
     public void delete(Group group) {
-
+        sessionFactory.getCurrentSession().delete(group);
     }
 
     @Override
