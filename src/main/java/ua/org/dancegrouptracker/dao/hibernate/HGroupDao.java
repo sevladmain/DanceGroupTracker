@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
@@ -30,19 +31,21 @@ public class HGroupDao implements GroupDao {
 
     @Override
     @Transactional
-    public Long saveOrUpdate(Group transientObject) {
-        return null;
+    public Long saveOrUpdate(Group group) {
+        sessionFactory.getCurrentSession().saveOrUpdate(group);
+        return group.getId();
     }
 
     @Override
     @Transactional
-    public void delete(Group persistentObject) {
+    public void delete(Group group) {
 
     }
 
     @Override
     @Transactional
     public List<Group> getAll() {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery("select g from Group g");
+        return query.getResultList();
     }
 }

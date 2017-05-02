@@ -42,7 +42,7 @@ public class HGroupDaoTest {
     @Rollback
     public void checkUpdatingGroup(){
         group.setId(1L);
-        groupDao.saveOrUpdate(group);
+        assertThat(groupDao.saveOrUpdate(group), equalTo(group.getId()));
         List<Group> groups = groupDao.getAll();
         assertThat("Wrong size of Saved User Array", groups.size(), equalTo(1));
         assertEquals("Saved users not equal", group, groups.get(0));
