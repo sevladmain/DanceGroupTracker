@@ -26,7 +26,7 @@ public class HGroupDao implements GroupDao {
     @Override
     @Transactional
     public Group read(Long id) {
-        return null;
+        return  sessionFactory.getCurrentSession().get(Group.class, id);
     }
 
     @Override

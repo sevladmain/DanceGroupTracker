@@ -59,5 +59,14 @@ public class HGroupDaoTest {
         assertThat("Group.DESCRIPTION not the same as in DB", users.get(0).getDescription(), equalTo("This is TestGroup1"));
     }
 
+    @Test
+    @Transactional
+    @Rollback
+    public void readSavedGroup(){
+        group.setId(1L);
+        groupDao.saveOrUpdate(group);
+        Group groupDouble = groupDao.read(group.getId());
+        assertEquals(groupDouble, group);
+    }
 
 }
