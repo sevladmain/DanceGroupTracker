@@ -1,16 +1,21 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
 
 import java.time.LocalDate;
+import java.util.List;
 
+import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.*;
 
 /**
@@ -30,6 +35,17 @@ public class HGroupDaoTest {
         group = new Group();
         group.setName("TestGroup2");
         group.setDescription("This is TestGroup2");
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void checkUpdatingGroup(){
+        group.setId(1L);
+        groupDao.saveOrUpdate(group);
+        List<Group> groups = groupDao.getAll();
+        assertThat("Wrong size of Saved User Array", groups.size(), equalTo(1));
+        assertEquals("Saved users not equal", group, groups.get(0));
     }
 
 
