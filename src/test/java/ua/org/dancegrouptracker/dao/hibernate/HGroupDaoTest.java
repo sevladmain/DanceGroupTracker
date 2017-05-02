@@ -29,7 +29,7 @@ public class HGroupDaoTest {
     public void setUp() throws Exception {
         group = new Group();
         group.setName("TestGroup2");
-        group.setDescription("This is test group2");
+        group.setDescription("This is TestGroup2");
     }
 
 
