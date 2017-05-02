@@ -44,8 +44,19 @@ public class HGroupDaoTest {
         group.setId(1L);
         assertThat(groupDao.saveOrUpdate(group), equalTo(group.getId()));
         List<Group> groups = groupDao.getAll();
-        assertThat("Wrong size of Saved User Array", groups.size(), equalTo(1));
-        assertEquals("Saved users not equal", group, groups.get(0));
+        assertThat("Wrong size of Saved Group Array", groups.size(), equalTo(1));
+        assertEquals("Saved groups not equal", group, groups.get(0));
+    }
+
+    @Test
+    @Transactional
+    @Rollback
+    public void testGetAllGroups() {
+        List<Group> users = groupDao.getAll();
+        assertThat("Groups not 1", users.size(), equalTo(1));
+        assertThat("Group.ID is not the same as in DB", users.get(0).getId(), equalTo(1L));
+        assertThat("Group.NAME not the same as in DB", users.get(0).getName(), equalTo("TestGroup1"));
+        assertThat("Group.DESCRIPTION not the same as in DB", users.get(0).getDescription(), equalTo("This is TestGroup1"));
     }
 
 
