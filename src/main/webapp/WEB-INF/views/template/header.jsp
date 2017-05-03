@@ -21,6 +21,25 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-left">
+                <sec:authorize access="has_role('ROLE_ADMIN')">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                           aria-haspopup="true" aria-expanded="false">Admin
+                            <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-ment">
+                            <li>
+                                <a href="#">Action</a>
+                            </li>
+                            <li role="separator" class="divider">
+                            </li>
+                            <li class="dropdown-header">Nav header</li>
+                            <li>
+                                <a href="#">Action2</a>
+                            </li>
+                        </ul>
+                    </li>
+                </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li>
                         <a href="<c:url value='/userdetails' />"><sec:authentication property="principal.username"/></a>
