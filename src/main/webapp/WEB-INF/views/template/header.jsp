@@ -19,9 +19,9 @@
 <body>
 <nav class="navbar navbar-default">
     <div class="container-fluid">
-        <div class="collapse navbar-collapse">
-            <ul class="nav navbar-nav navbar-left">
-                <sec:authorize access="has_role('ROLE_ADMIN')">
+        <sec:authorize access="hasRole('ROLE_ADMIN')">
+            <div id="admin_navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                            aria-haspopup="true" aria-expanded="false">Admin
@@ -39,7 +39,11 @@
                             </li>
                         </ul>
                     </li>
-                </sec:authorize>
+                </ul>
+            </div>
+        </sec:authorize>
+        <div class="collapse navbar-collapse">
+            <ul class="nav navbar-nav navbar-left">
                 <sec:authorize access="isAuthenticated()">
                     <li>
                         <a href="<c:url value='/userdetails' />"><sec:authentication property="principal.username"/></a>

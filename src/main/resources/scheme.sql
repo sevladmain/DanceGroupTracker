@@ -39,5 +39,7 @@ CREATE TABLE GROUPS(
   name VARCHAR(50) NOT NULL,
   description VARCHAR (200)
 );
+INSERT INTO users values ('user','$2a$10$7JW2jh71w.20hEM1N5enBeEhyyqMarWCwHGKwx8mZElLoyTCWXx/C', true, 'user@user.org', '2017-01-01');
+INSERT INTO roles (role_name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (role_name) VALUES ('ROLE_USER');
-INSERT INTO roles (role_name) VALUES ('ROLE_MANAGER');
+INSERT INTO userroles values ('user', 1);
