@@ -47,5 +47,5 @@
         </div>
     </div>
 </div>
-<spring:url value="/resources/js/script.js" var="script" />
+<script src="<spring:url value="/resources/js/script.js" />" ></script>
 <%@include file="/WEB-INF/views/template/footer.jsp" %>
