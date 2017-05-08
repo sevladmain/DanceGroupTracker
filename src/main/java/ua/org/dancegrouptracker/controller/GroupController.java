@@ -6,8 +6,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ua.org.dancegrouptracker.model.Group;
 import ua.org.dancegrouptracker.services.GroupService;
 
@@ -57,4 +59,17 @@ public class GroupController {
         model.addAttribute("groups", groupService.getAllGroups());
         return "group.all";
     }
+
+    @RequestMapping(value = "/admin/delete_group/{id}", method = RequestMethod.POST)
+    public String deleteGroup(@PathVariable("id") Long id, Locale locale, RedirectAttributes redirectAttributes){
+        Group group = groupService.findGroupById(id);
+        if(group != null){
+            groupService.deleteGroup(group);
+            redirectAttributes.addFlashAttribute("msg", messageSource.getMessage("GroupController.GroupDeleted", null, locale));
+        } else {
+            redirectAttributes.addFlashAttribute("error", messageSource.getMessage("GroupController.CantDeleteGroup", null, locale));
+        }
+        return "redirect:/admin/all_groups";
+    }
+
 }
