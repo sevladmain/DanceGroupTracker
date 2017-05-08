@@ -13,7 +13,7 @@
         <c:if test="${not empty error}">
             <div class="alert alert-danger" role="alert">${error}</div>
         </c:if>
-        <form:form id="newgroup-from" action="${updateUrl}" modelAttribute="newGroup" method="post">
+        <form:form id="newgroup-from" action="${newGroupUrl}" modelAttribute="newGroup" method="post">
             <div class="form-group">
                 <form:input type="text" path="name" id="name" tabindex="1"
                             class="form-control" placeholder="${groupName}" value=""/><br/>
