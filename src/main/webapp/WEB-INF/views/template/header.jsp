@@ -31,7 +31,7 @@
                             <ul class="dropdown-menu">
                                 <li class="dropdown-header"><spring:message code="admin.groups.label"/></li>
                                 <li>
-                                    <a href="<c:url value='/add_group' />"><spring:message code="admin.addGroup.label"/></a>
+                                    <a href="<c:url value='/admin/add_group' />"><spring:message code="admin.addGroup.label"/></a>
                                 </li>
                                 <li role="separator" class="divider">
                                 </li>

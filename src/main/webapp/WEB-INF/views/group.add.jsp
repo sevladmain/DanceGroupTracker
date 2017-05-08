@@ -3,7 +3,7 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <div class="row">
     <div class="col-md-6 col-md-offset-3">
-        <spring:url value="/newgroup" var="newGroupUrl"/>
+        <spring:url value="/admin/newgroup" var="newGroupUrl"/>
         <spring:message code='Group.name.label' var="groupName"/>
         <spring:message code='Group.description.label' var="groupDescription"/>
         <spring:message code='Group.SaveButton.label' var="saveButtonMessage"/>

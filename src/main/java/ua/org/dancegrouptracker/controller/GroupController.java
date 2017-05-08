@@ -16,8 +16,8 @@ public class GroupController {
     @Autowired
     private GroupService groupService;
 
-    @RequestMapping(value = "/add_group", method = RequestMethod.GET)
-    String showAddNewGroupPage(Model model){
+    @RequestMapping(value = "/admin/add_group", method = RequestMethod.GET)
+    public String showAddNewGroupPage(Model model){
         return "group.add";
     }
 }
