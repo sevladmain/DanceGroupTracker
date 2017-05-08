@@ -51,4 +51,10 @@ public class GroupController {
         }
         return "group.add";
     }
+
+    @RequestMapping(value = "/admin/all_groups", method = RequestMethod.GET)
+    public String getAllGroupsPage(Model model){
+        model.addAttribute("groups", groupService.getAllGroups());
+        return "group.all";
+    }
 }

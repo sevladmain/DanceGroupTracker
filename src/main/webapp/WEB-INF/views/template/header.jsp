@@ -33,6 +33,9 @@
                                 <li>
                                     <a href="<c:url value='/admin/add_group' />"><spring:message code="admin.addGroup.label"/></a>
                                 </li>
+                                <li>
+                                    <a href="<c:url value='/admin/all_groups' />"><spring:message code="admin.allGroup.label"/></a>
+                                </li>
                                 <li role="separator" class="divider">
                                 </li>
                                 <li class="dropdown-header">Nav header</li>
