@@ -32,13 +32,14 @@
                         <td>${group.description}</td>
                         <td>
                             <spring:url value="/admin/delete_group/${group.id}" var="deleteUrl"/>
-                            <spring:url value="/admin/update_group/${group.id}" var="#"/>
+                            <spring:url value="/admin/update_group/${group.id}" var="updateUrl"/>
 
-                            <button class="btn btn-primary"
-                                    onclick="location.href='${updateUrl}'">${UpdateLabel}</button>
-                            <button class="btn btn-danger"
-                                    onclick="this.disabled=true;post('${deleteUrl}')">${DeleteLabel}
-                            </button>
+                            <form class="form-inline" action="${updateUrl}" method="get">
+                                <button class="btn btn-primary" type="submit">${UpdateLabel}</button>
+                                <button class="btn btn-danger" type="submit" formmethod="post"
+                                        formaction="${deleteUrl}">${DeleteLabel}</button>
+                                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                            </form>
                         </td>
                     </tr>
                 </c:forEach>
@@ -47,5 +48,4 @@
         </div>
     </div>
 </div>
-<script src="<spring:url value="/resources/js/script.js" />" ></script>
 <%@include file="/WEB-INF/views/template/footer.jsp" %>

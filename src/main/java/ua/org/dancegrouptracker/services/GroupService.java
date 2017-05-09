@@ -15,15 +15,13 @@ public class GroupService {
     private GroupDao groupDao;
 
     @Transactional
-    public Long saveOrUpdateGroup(Group group){
+    public Long saveOrUpdateGroup(Group group) {
         return groupDao.saveOrUpdate(group);
     }
 
     @Transactional
-    public void deleteGroup(Group group){
-        if(findGroupById(group.getId()) != null){
-            groupDao.delete(group);
-        }
+    public void deleteGroup(Group group) {
+        groupDao.delete(group);
     }
 
     @Transactional
@@ -32,12 +30,12 @@ public class GroupService {
     }
 
     @Transactional
-    public List<Group> getAllGroups(){
+    public List<Group> getAllGroups() {
         return groupDao.getAll();
     }
 
     @Transactional
-    public List<Group> findGroupByName(String name){
+    public List<Group> findGroupByName(String name) {
         return groupDao.getGroupByName(name);
     }
 }
