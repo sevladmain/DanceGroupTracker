@@ -39,6 +39,15 @@ CREATE TABLE GROUPS(
   name VARCHAR(50) NOT NULL,
   description VARCHAR (200)
 );
+CREATE TABLE USERGROUPROLE(
+  username VARCHAR_IGNORECASE(50) NOT NULL,
+  groupid INTEGER NOT NULL,
+  datefrom DATE NOT NULL,
+  dateto DATE NOT NULL,
+  grouprole VARCHAR(20),
+  CONSTRAINT fk_usergrouprole_users FOREIGN KEY (username) REFERENCES users (username),
+  CONSTRAINT fk_usergrouprole_groups FOREIGN KEY (groupid) REFERENCES groups (id)
+);
 INSERT INTO users values ('user','$2a$10$7JW2jh71w.20hEM1N5enBeEhyyqMarWCwHGKwx8mZElLoyTCWXx/C', true, 'user@user.org', '2017-01-01');
 INSERT INTO roles (role_name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (role_name) VALUES ('ROLE_USER');

@@ -40,6 +40,15 @@ CREATE TABLE GROUPS(
   name VARCHAR(50) NOT NULL,
   description VARCHAR (200)
 );
+CREATE TABLE USERGROUPROLE(
+  username VARCHAR_IGNORECASE(50) NOT NULL,
+  groupid INTEGER NOT NULL,
+  datefrom DATE NOT NULL,
+  dateto DATE NOT NULL,
+  grouprole VARCHAR(20),
+  CONSTRAINT fk_usergrouprole_users FOREIGN KEY (username) REFERENCES users (username),
+  CONSTRAINT fk_usergrouprole_groups FOREIGN KEY (groupid) REFERENCES groups (id)
+);
 INSERT INTO roles (role_name) VALUES ('ROLE_USER');
 INSERT INTO roles (role_name) VALUES ('ROLE_MANAGER');
 INSERT INTO users VALUES ('user1', 'user1', TRUE, 'test@t.t', '2010-01-01');
