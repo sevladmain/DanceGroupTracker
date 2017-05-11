@@ -13,6 +13,7 @@ import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 
+import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -113,7 +114,7 @@ public class HUserDaoTest {
         assertEquals(null, userDouble);
     }
 
-    @Test()
+    @Test(expected = PersistenceException.class)
     @Transactional
     @Rollback
     public void whenDeleteUserThenPersistenceExceptionBecauseOfUserDetailsConstraint(){

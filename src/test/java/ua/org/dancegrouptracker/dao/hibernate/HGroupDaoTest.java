@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -70,10 +71,10 @@ public class HGroupDaoTest {
         assertEquals(groupDouble, group);
     }
 
-    @Test
+    @Test(expected = PersistenceException.class)
     @Transactional
     @Rollback
-    public void deleteExistingGroupTest(){
+    public void deleteExistingGroupTestThenPersistenceExceptionBecauseOfForeignKeys(){
         List<Group> groups = groupDao.getAll();
         groupDao.delete(groups.get(0));
         groups = groupDao.getAll();

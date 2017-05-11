@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.junit.Before;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ActiveProfiles;
@@ -48,5 +49,8 @@ public class HUserGroupRoleDaoTest {
         userGroupRole.getKey().setDateFrom(LocalDate.of(2010, 1, 1));
         userGroupRole.getKey().setDateTo(LocalDate.of(2099,1,1));
     }
+    @Test
+    public void testSaveUserGroupRole(){
 
+    }
 }
