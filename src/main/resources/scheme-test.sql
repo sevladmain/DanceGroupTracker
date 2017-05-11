@@ -55,3 +55,4 @@ INSERT INTO users VALUES ('user1', 'user1', TRUE, 'test@t.t', '2010-01-01');
 INSERT INTO userroles VALUES ('user1', 1);
 INSERT INTO userdetails VALUES ('user1', 'firstname', 'lastname', '1998-01-01');
 INSERT INTO GROUPS (name, description) VALUES ('TestGroup1', 'This is TestGroup1');
+INSERT INTO USERGROUPROLE(username, groupid, datefrom, dateto, grouprole) VALUES ('user1', 1, '2010-01-01', '2099-01-01', 'TREASURER');
