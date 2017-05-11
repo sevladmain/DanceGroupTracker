@@ -13,7 +13,6 @@ import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 
-import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -40,7 +39,7 @@ public class HUserDaoTest {
     public void setUp() throws Exception {
         Role role = new Role();
         role.setId(1l);
-        role.setRoleName(ROLE_USER.name());
+        role.setRoleName(ROLE_USER);
         user = new User();
         user.setUsername("testUser");
         user.setAuthority(role);

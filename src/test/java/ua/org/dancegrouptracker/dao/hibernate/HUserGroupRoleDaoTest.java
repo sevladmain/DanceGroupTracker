@@ -37,16 +37,16 @@ public class HUserGroupRoleDaoTest {
         user.setEnabled(true);
         user.setEmail("test@t.t.");
         user.setDateRegister(LocalDate.of(2017, 1, 1));
-        userGroupRole.setUser(user);
+        userGroupRole.getKey().setUser(user);
         //INSERT INTO GROUPS (name, description) VALUES ('TestGroup1', 'This is TestGroup1');
         Group group = new Group();
         group.setId(1L);
         group.setName("TestGroup1");
         group.setDescription("This is TestGroup1");
-        userGroupRole.setGroup(group);
+        userGroupRole.getKey().setGroup(group);
         userGroupRole.setGroupRole(GroupRole.TREASURER);
-        userGroupRole.setDateFrom(LocalDate.of(2010, 1, 1));
-        userGroupRole.setDateTo(LocalDate.of(2099,1,1));
+        userGroupRole.getKey().setDateFrom(LocalDate.of(2010, 1, 1));
+        userGroupRole.getKey().setDateTo(LocalDate.of(2099,1,1));
     }
 
 }

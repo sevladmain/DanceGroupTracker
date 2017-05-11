@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.RoleDao;
 import ua.org.dancegrouptracker.model.Role;
+import ua.org.dancegrouptracker.model.RoleType;
 
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class HRoleDao implements RoleDao {
     @Transactional
     public Role getRolesByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("from Role r where r.roleName=:name");
-        query.setParameter("name", name);
+        query.setParameter("name", RoleType.valueOf(name));
         return (Role) query.uniqueResult();
     }
 }
