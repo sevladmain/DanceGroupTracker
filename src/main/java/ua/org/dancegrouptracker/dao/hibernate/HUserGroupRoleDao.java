@@ -30,7 +30,8 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     @Override
     @Transactional
     public void delete(UserGroupRole userGroupRole) {
-
+        Session currentSession = sessionFactory.getCurrentSession();
+        currentSession.delete(userGroupRole);
     }
 
     @Override

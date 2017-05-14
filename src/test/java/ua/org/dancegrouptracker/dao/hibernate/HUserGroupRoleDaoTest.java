@@ -67,6 +67,18 @@ public class HUserGroupRoleDaoTest {
         assertThat("Wrong size of Saved Group Array", roles.size(), equalTo(2));
     }
 
+    @Test
+    @Rollback
+    @Transactional
+    public void deleteSavedUserGroupRole(){
+        userGroupRole.getKey().setDateFrom(LocalDate.of(2009, 1, 1));
+        userGroupRole.getKey().setDateTo(LocalDate.of(2009, 12, 31));
+        userGroupRole.setGroupRole(GroupRole.MANAGER);
+        userGroupRoleDao.saveOrUpdate(userGroupRole);
+        userGroupRoleDao.delete(userGroupRole);
+        List<UserGroupRole> roles = userGroupRoleDao.getAll();
+        assertThat("Wrong size of Saved Group Array", roles.size(), equalTo(1));
+    }
 
 
 }
