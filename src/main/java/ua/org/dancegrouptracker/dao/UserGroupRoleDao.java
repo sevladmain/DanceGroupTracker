@@ -1,9 +1,6 @@
 package ua.org.dancegrouptracker.dao;
 
-import ua.org.dancegrouptracker.model.Group;
-import ua.org.dancegrouptracker.model.GroupRole;
-import ua.org.dancegrouptracker.model.User;
-import ua.org.dancegrouptracker.model.UserGroupRole;
+import ua.org.dancegrouptracker.model.*;
 
 import java.util.List;
 
@@ -12,7 +9,7 @@ import java.util.List;
  */
 public interface UserGroupRoleDao {
 
-    boolean saveOrUpdate(UserGroupRole userGroupRole);
+    UserGroupRoleKey saveOrUpdate(UserGroupRole userGroupRole);
 
     void delete(UserGroupRole userGroupRole);
 
@@ -22,5 +19,5 @@ public interface UserGroupRoleDao {
 
     List<UserGroupRole> getAllByGroupRole(GroupRole groupRole);
 
-
+    List<UserGroupRole> getAll();
 }

@@ -4,15 +4,20 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserGroupRoleDao;
 import ua.org.dancegrouptracker.model.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
 /**
  * Created by SeVlad on 09.05.2017.
@@ -49,8 +54,19 @@ public class HUserGroupRoleDaoTest {
         userGroupRole.getKey().setDateFrom(LocalDate.of(2010, 1, 1));
         userGroupRole.getKey().setDateTo(LocalDate.of(2099,1,1));
     }
-    @Test
-    public void testSaveUserGroupRole(){
 
+    @Test
+    @Rollback
+    @Transactional
+    public void testSaveUserGroupRole(){
+        userGroupRole.getKey().setDateFrom(LocalDate.of(2009, 1, 1));
+        userGroupRole.getKey().setDateTo(LocalDate.of(2009, 12, 31));
+        userGroupRole.setGroupRole(GroupRole.MANAGER);
+        userGroupRoleDao.saveOrUpdate(userGroupRole);
+        List<UserGroupRole> roles = userGroupRoleDao.getAll();
+        assertThat("Wrong size of Saved Group Array", roles.size(), equalTo(2));
     }
+
+
+
 }
