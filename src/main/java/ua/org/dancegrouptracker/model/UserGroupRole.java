@@ -56,4 +56,12 @@ public class UserGroupRole {
         result = 31 * result + (groupRole != null ? groupRole.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserGroupRole{" +
+                "key=" + key +
+                ", groupRole=" + groupRole +
+                '}';
+    }
 }

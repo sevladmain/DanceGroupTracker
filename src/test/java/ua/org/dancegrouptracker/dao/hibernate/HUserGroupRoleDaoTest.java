@@ -37,12 +37,16 @@ public class HUserGroupRoleDaoTest {
         // VALUES ('user1', 1, '2010-01-01', '2099-01-01', 'TREASURER');
         userGroupRole = new UserGroupRole();
         //INSERT INTO users VALUES ('user1', 'user1', TRUE, 'test@t.t', '2010-01-01');
+        Role role = new Role();
+        role.setId(1L);
+        role.setRoleName(RoleType.ROLE_USER);
         User user =  new User();
         user.setUsername("user1");
-        user.setPassword("user1");
+        user.setAuthority(role);
+        user.setEncodedPassword("user1");
         user.setEnabled(true);
-        user.setEmail("test@t.t.");
-        user.setDateRegister(LocalDate.of(2017, 1, 1));
+        user.setEmail("test@t.t");
+        user.setDateRegister(LocalDate.of(2010, 1, 1));
         userGroupRole.getKey().setUser(user);
         //INSERT INTO GROUPS (name, description) VALUES ('TestGroup1', 'This is TestGroup1');
         Group group = new Group();
@@ -80,5 +84,13 @@ public class HUserGroupRoleDaoTest {
         assertThat("Wrong size of Saved Group Array", roles.size(), equalTo(1));
     }
 
+    @Test
+    @Rollback
+    @Transactional
+    public void getAllUserGroupRoleForTestGroup(){
+        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByGroup(userGroupRole.getKey().getGroup());
+        assertThat(allByGroup.size(), equalTo(1));
+        assertThat(allByGroup.get(0), equalTo(userGroupRole));
+    }
 
 }

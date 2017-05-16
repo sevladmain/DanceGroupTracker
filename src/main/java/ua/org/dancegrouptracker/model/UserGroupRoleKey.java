@@ -75,4 +75,14 @@ public class UserGroupRoleKey implements Serializable {
         result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "UserGroupRoleKey{" +
+                "user=" + user +
+                ", group=" + group +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
+                '}';
+    }
 }
