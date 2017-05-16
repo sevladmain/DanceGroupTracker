@@ -53,7 +53,9 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     @Override
     @Transactional
     public List<UserGroupRole> getAllByGroupRole(GroupRole groupRole) {
-        return null;
+        Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where groupRole = :groupRole");
+        query.setParameter("groupRole", groupRole);
+        return query.getResultList();
     }
 
     @Override
