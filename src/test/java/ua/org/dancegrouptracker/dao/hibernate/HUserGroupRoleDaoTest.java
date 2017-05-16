@@ -93,4 +93,13 @@ public class HUserGroupRoleDaoTest {
         assertThat(allByGroup.get(0), equalTo(userGroupRole));
     }
 
+    @Test
+    @Rollback
+    @Transactional
+    public void getUserGroupRoleByTestUser(){
+        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByUser(userGroupRole.getKey().getUser());
+        assertThat(allByGroup.size(), equalTo(1));
+        assertThat(allByGroup.get(0), equalTo(userGroupRole));
+    }
+
 }
