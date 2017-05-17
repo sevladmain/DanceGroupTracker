@@ -16,7 +16,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 /**
@@ -47,24 +46,24 @@ public class HUserGroupRoleDaoTest {
         user.setEnabled(true);
         user.setEmail("test@t.t");
         user.setDateRegister(LocalDate.of(2010, 1, 1));
-        userGroupRole.getKey().setUser(user);
+        userGroupRole.setUser(user);
         //INSERT INTO GROUPS (name, description) VALUES ('TestGroup1', 'This is TestGroup1');
         Group group = new Group();
         group.setId(1L);
         group.setName("TestGroup1");
         group.setDescription("This is TestGroup1");
-        userGroupRole.getKey().setGroup(group);
+        userGroupRole.setGroup(group);
         userGroupRole.setGroupRole(GroupRole.TREASURER);
-        userGroupRole.getKey().setDateFrom(LocalDate.of(2010, 1, 1));
-        userGroupRole.getKey().setDateTo(LocalDate.of(2099,1,1));
+        userGroupRole.setDateFrom(LocalDate.of(2010, 1, 1));
+        userGroupRole.setDateTo(LocalDate.of(2099,1,1));
     }
 
     @Test
     @Rollback
     @Transactional
     public void testSaveUserGroupRole(){
-        userGroupRole.getKey().setDateFrom(LocalDate.of(2009, 1, 1));
-        userGroupRole.getKey().setDateTo(LocalDate.of(2009, 12, 31));
+        userGroupRole.setDateFrom(LocalDate.of(2009, 1, 1));
+        userGroupRole.setDateTo(LocalDate.of(2009, 12, 31));
         userGroupRole.setGroupRole(GroupRole.MANAGER);
         userGroupRoleDao.saveOrUpdate(userGroupRole);
         List<UserGroupRole> roles = userGroupRoleDao.getAll();
@@ -75,8 +74,8 @@ public class HUserGroupRoleDaoTest {
     @Rollback
     @Transactional
     public void deleteSavedUserGroupRole(){
-        userGroupRole.getKey().setDateFrom(LocalDate.of(2009, 1, 1));
-        userGroupRole.getKey().setDateTo(LocalDate.of(2009, 12, 31));
+        userGroupRole.setDateFrom(LocalDate.of(2009, 1, 1));
+        userGroupRole.setDateTo(LocalDate.of(2009, 12, 31));
         userGroupRole.setGroupRole(GroupRole.MANAGER);
         userGroupRoleDao.saveOrUpdate(userGroupRole);
         userGroupRoleDao.delete(userGroupRole);
@@ -88,7 +87,7 @@ public class HUserGroupRoleDaoTest {
     @Rollback
     @Transactional
     public void getAllUserGroupRoleForTestGroup(){
-        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByGroup(userGroupRole.getKey().getGroup());
+        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByGroup(userGroupRole.getGroup());
         assertThat(allByGroup.size(), equalTo(1));
         assertThat(allByGroup.get(0), equalTo(userGroupRole));
     }
@@ -97,7 +96,7 @@ public class HUserGroupRoleDaoTest {
     @Rollback
     @Transactional
     public void getUserGroupRoleByTestUser(){
-        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByUser(userGroupRole.getKey().getUser());
+        List<UserGroupRole> allByGroup = userGroupRoleDao.getAllByUser(userGroupRole.getUser());
         assertThat(allByGroup.size(), equalTo(1));
         assertThat(allByGroup.get(0), equalTo(userGroupRole));
     }

@@ -18,13 +18,18 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     private SessionFactory sessionFactory;
 
     @Override
+    public UserGroupRole read(Long id) {
+        return null;
+    }
+
+    @Override
     @Transactional
-    public UserGroupRoleKey saveOrUpdate(UserGroupRole userGroupRole) {
+    public Long saveOrUpdate(UserGroupRole userGroupRole) {
 
         Session currentSession = sessionFactory.getCurrentSession();
         currentSession.saveOrUpdate(userGroupRole);
         currentSession.flush();
-        return userGroupRole.getKey();
+        return userGroupRole.getId();
     }
 
     @Override
