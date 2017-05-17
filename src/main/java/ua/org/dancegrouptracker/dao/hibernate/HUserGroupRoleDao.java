@@ -19,7 +19,7 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
 
     @Override
     public UserGroupRole read(Long id) {
-        return null;
+        return sessionFactory.getCurrentSession().get(UserGroupRole.class, id);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     @Override
     @Transactional
     public List<UserGroupRole> getAllByGroup(Group group) {
-        Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where key.group = :group");
+        Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where group = :group");
         query.setParameter("group", group);
         return query.getResultList();
     }
@@ -50,7 +50,7 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     @Override
     @Transactional
     public List<UserGroupRole> getAllByUser(User user) {
-        Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where key.user = :user");
+        Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where user = :user");
         query.setParameter("user", user);
         return query.getResultList();
     }

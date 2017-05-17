@@ -35,6 +35,7 @@ public class HUserGroupRoleDaoTest {
         //INSERT INTO USERGROUPROLE(username, groupid, datefrom, dateto, grouprole)
         // VALUES ('user1', 1, '2010-01-01', '2099-01-01', 'TREASURER');
         userGroupRole = new UserGroupRole();
+        userGroupRole.setId(1L);
         //INSERT INTO users VALUES ('user1', 'user1', TRUE, 'test@t.t', '2010-01-01');
         Role role = new Role();
         role.setId(1L);
@@ -62,6 +63,7 @@ public class HUserGroupRoleDaoTest {
     @Rollback
     @Transactional
     public void testSaveUserGroupRole(){
+        userGroupRole.setId(2L);
         userGroupRole.setDateFrom(LocalDate.of(2009, 1, 1));
         userGroupRole.setDateTo(LocalDate.of(2009, 12, 31));
         userGroupRole.setGroupRole(GroupRole.MANAGER);
@@ -73,7 +75,16 @@ public class HUserGroupRoleDaoTest {
     @Test
     @Rollback
     @Transactional
+    public void readExistingUserGroupRole(){
+        UserGroupRole test_ugr = userGroupRoleDao.read(userGroupRole.getId());
+        assertThat(test_ugr, equalTo(userGroupRole));
+    }
+
+    @Test
+    @Rollback
+    @Transactional
     public void deleteSavedUserGroupRole(){
+        userGroupRole.setId(2L);
         userGroupRole.setDateFrom(LocalDate.of(2009, 1, 1));
         userGroupRole.setDateTo(LocalDate.of(2009, 12, 31));
         userGroupRole.setGroupRole(GroupRole.MANAGER);
