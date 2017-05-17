@@ -8,14 +8,25 @@ import java.time.LocalDate;
  */
 @Entity
 @Table(name = "usergrouprole")
-@AssociationOverrides({
-        @AssociationOverride(name = "key.user", joinColumns = @JoinColumn(name = "username")),
-        @AssociationOverride(name = "key.group", joinColumns = @JoinColumn(name = "groupid"))
-})
 public class UserGroupRole {
 
-    @EmbeddedId
-    private UserGroupRoleKey key = new UserGroupRoleKey();
+    @Id
+    @Column(name = "id")
+    private Long id;
+
+    @JoinColumn(name = "username")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private User user;
+
+    @JoinColumn(name = "groupid")
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private Group group;
+
+    @Column(name = "datefrom")
+    private LocalDate dateFrom;
+
+    @Column(name = "dateto")
+    private LocalDate dateTo;
 
     @Column(name = "grouprole")
     @Enumerated(EnumType.STRING)
@@ -30,12 +41,44 @@ public class UserGroupRole {
         this.groupRole = groupRole;
     }
 
-    public UserGroupRoleKey getKey() {
-        return key;
+    public Long getId() {
+        return id;
     }
 
-    public void setKey(UserGroupRoleKey key) {
-        this.key = key;
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Group getGroup() {
+        return group;
+    }
+
+    public void setGroup(Group group) {
+        this.group = group;
+    }
+
+    public LocalDate getDateFrom() {
+        return dateFrom;
+    }
+
+    public void setDateFrom(LocalDate dateFrom) {
+        this.dateFrom = dateFrom;
+    }
+
+    public LocalDate getDateTo() {
+        return dateTo;
+    }
+
+    public void setDateTo(LocalDate dateTo) {
+        this.dateTo = dateTo;
     }
 
     @Override
@@ -45,14 +88,22 @@ public class UserGroupRole {
 
         UserGroupRole that = (UserGroupRole) o;
 
-        if (key != null ? !key.equals(that.key) : that.key != null) return false;
+        if (id != null ? !id.equals(that.id) : that.id != null) return false;
+        if (user != null ? !user.equals(that.user) : that.user != null) return false;
+        if (group != null ? !group.equals(that.group) : that.group != null) return false;
+        if (dateFrom != null ? !dateFrom.equals(that.dateFrom) : that.dateFrom != null) return false;
+        if (dateTo != null ? !dateTo.equals(that.dateTo) : that.dateTo != null) return false;
         return groupRole == that.groupRole;
 
     }
 
     @Override
     public int hashCode() {
-        int result = key != null ? key.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (group != null ? group.hashCode() : 0);
+        result = 31 * result + (dateFrom != null ? dateFrom.hashCode() : 0);
+        result = 31 * result + (dateTo != null ? dateTo.hashCode() : 0);
         result = 31 * result + (groupRole != null ? groupRole.hashCode() : 0);
         return result;
     }
@@ -60,7 +111,11 @@ public class UserGroupRole {
     @Override
     public String toString() {
         return "UserGroupRole{" +
-                "key=" + key +
+                "id=" + id +
+                ", user=" + user +
+                ", group=" + group +
+                ", dateFrom=" + dateFrom +
+                ", dateTo=" + dateTo +
                 ", groupRole=" + groupRole +
                 '}';
     }
