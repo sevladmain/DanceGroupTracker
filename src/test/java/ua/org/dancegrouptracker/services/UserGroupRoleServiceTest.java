@@ -14,6 +14,7 @@ import ua.org.dancegrouptracker.model.UserGroupRole;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
@@ -44,7 +45,7 @@ public class UserGroupRoleServiceTest {
         Group group1 = new Group();
         group1.setId(1L);
         Group group2 = new Group();
-        group1.setId(2L);
+        group2.setId(2L);
         UserGroupRole data1 = new UserGroupRole();
         data1.setId(1L);
         data1.setUser(user1);
@@ -76,10 +77,11 @@ public class UserGroupRoleServiceTest {
 
     @Test
     public void getAllUsersFromGroupTest() {
-        results.remove(3);
-        results.remove(1);
-        Group group = results.get(0).getGroup();
-        when(dao.getAllByGroup(group)).thenReturn(results);
+        List<UserGroupRole> filteredList = results.stream()
+                .filter(u -> u.getGroup().getId() == 1L)
+                .collect(Collectors.toList());
+        Group group = filteredList .get(0).getGroup();
+        when(dao.getAllByGroup(group)).thenReturn(filteredList );
         List<User> users = service.getAllUsersFromGroup(group);
         User user1 = new User();
         user1.setUsername("user1");
@@ -88,6 +90,22 @@ public class UserGroupRoleServiceTest {
 
         assertThat(users.size(), equalTo(2));
         assertThat(users, contains(equalTo(user1), equalTo(user2)));
+
+    }
+
+    @Test
+    public void getAllUsersFromGroupWithGroupRole(){
+        List<UserGroupRole> filteredList = results.stream()
+                .filter(u -> u.getGroup().getId() == 1L)
+                .collect(Collectors.toList());
+        Group group = results.get(0).getGroup();
+        when(dao.getAllByGroup(group)).thenReturn(results);
+        List<User> users = service.getAllUsersFromGroup(group, GroupRole.MANAGER);
+        User user1 = new User();
+        user1.setUsername("user1");
+
+        assertThat(users.size(), equalTo(1));
+        assertThat(users, contains(equalTo(user1)));
 
     }
 

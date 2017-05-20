@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserGroupRoleDao;
 import ua.org.dancegrouptracker.model.Group;
+import ua.org.dancegrouptracker.model.GroupRole;
 import ua.org.dancegrouptracker.model.User;
 import ua.org.dancegrouptracker.model.UserGroupRole;
 
@@ -44,6 +45,17 @@ public class UserGroupRoleService {
                                 .map(u -> u.getUser())
                                 .distinct()
                                 .collect(Collectors.toList());
+        return users;
+    }
+
+    @Transactional
+    public List<User> getAllUsersFromGroup(Group group, GroupRole role) {
+        List<UserGroupRole> list = userGroupRoleDao.getAllByGroup(group);
+        List<User> users = list.stream()
+                .filter(u -> u.getGroupRole() == role)
+                .map(u -> u.getUser())
+                .distinct()
+                .collect(Collectors.toList());
         return users;
     }
 }
