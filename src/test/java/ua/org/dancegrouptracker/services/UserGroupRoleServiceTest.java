@@ -99,13 +99,33 @@ public class UserGroupRoleServiceTest {
                 .filter(u -> u.getGroup().getId() == 1L)
                 .collect(Collectors.toList());
         Group group = results.get(0).getGroup();
-        when(dao.getAllByGroup(group)).thenReturn(results);
+        when(dao.getAllByGroup(group)).thenReturn(filteredList);
         List<User> users = service.getAllUsersFromGroup(group, GroupRole.MANAGER);
         User user1 = new User();
         user1.setUsername("user1");
 
         assertThat(users.size(), equalTo(1));
         assertThat(users, contains(equalTo(user1)));
+
+    }
+
+    @Test
+    public void getAllUsersGroupTest(){
+        List<UserGroupRole> filteredList = results.stream()
+                .filter(u -> u.getUser().getUsername().equals("user1"))
+                .collect(Collectors.toList());
+        User user = results.get(0).getUser();
+        when(dao.getAllByUser(user)).thenReturn(filteredList);
+        List<Group> groups = service.getAllGroupsFromUser(user);
+
+
+        Group group1 = new Group();
+        group1.setId(1L);
+        Group group2 = new Group();
+        group2.setId(2L);
+
+        assertThat(groups.size(), equalTo(2));
+        assertThat(groups, contains(equalTo(group1), equalTo(group2)));
 
     }
 
