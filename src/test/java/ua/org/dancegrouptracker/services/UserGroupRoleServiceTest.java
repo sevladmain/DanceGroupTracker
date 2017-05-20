@@ -149,4 +149,18 @@ public class UserGroupRoleServiceTest {
 
     }
 
+    @Test
+    public void checkExistingGroupRoleForGroupAndUser(){
+        when(dao.getAll()).thenReturn(results);
+
+        User user2 = new User();
+        user2.setUsername("user2");
+
+        Group group2 = new Group();
+        group2.setId(2L);
+
+        assertThat(service.checkUserGroupRole(user2, group2, GroupRole.TREASURER), equalTo(true));
+
+    }
+
 }

@@ -78,4 +78,12 @@ public class UserGroupRoleService {
                 .collect(Collectors.toList());
         return groups;
     }
+
+    public boolean checkUserGroupRole(User user, Group group, GroupRole role) {
+        List<UserGroupRole> list = userGroupRoleDao.getAll();
+        long count = list.stream()
+                .filter(u -> u.getUser().equals(user) && u.getGroup().equals(group) && u.getGroupRole() == role)
+                .count();
+        return count > 0L;
+    }
 }
