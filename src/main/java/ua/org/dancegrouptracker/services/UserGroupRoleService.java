@@ -68,4 +68,14 @@ public class UserGroupRoleService {
                 .collect(Collectors.toList());
         return groups;
     }
+
+    public List<Group> getAllGroupsFromUser(User user, GroupRole role) {
+        List<UserGroupRole> list = userGroupRoleDao.getAllByUser(user);
+        List<Group> groups = list.stream()
+                .filter(u -> u.getGroupRole() == role)
+                .map(u -> u.getGroup())
+                .distinct()
+                .collect(Collectors.toList());
+        return groups;
+    }
 }
