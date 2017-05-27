@@ -36,8 +36,8 @@ public class HRoleDaoTest {
         newRole = new Role();
         existingRole = new Role();
         existingRole.setId(1l);
-        existingRole.setRoleName(ROLE_USER.name());
-        newRole.setRoleName(ROLE_ADMIN.name());
+        existingRole.setRoleName(ROLE_USER);
+        newRole.setRoleName(ROLE_ADMIN);
     }
 
     @Test

@@ -36,11 +36,6 @@ public class HUserDetailsDaoTest {
     @Before
     public void setUp() throws Exception {
         // INSERT INTO userdetails VALUES ('user1', 'firstname', 'lastname', '1998-01-01');
-        /*userDetails = new UserDetails();
-        userDetails.setUsername("user1");
-        userDetails.setFirstName("firstname");
-        userDetails.setLastName("lastname");
-        userDetails.setDateOfBirth(LocalDate.of(1998, 1, 1));*/
         userDetails = new UserDetails();
         userDetails.setUsername("user2");
         userDetails.setFirstName("firstname1");

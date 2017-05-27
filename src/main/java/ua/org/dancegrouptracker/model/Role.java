@@ -14,7 +14,8 @@ public class Role {
     private Long id;
 
     @Column(name = "role_name")
-    private String roleName;
+    @Enumerated(EnumType.STRING)
+    private RoleType roleName;
 
     public Long getId() {
         return id;
@@ -24,11 +25,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getRoleName() {
+    public RoleType getRoleName() {
         return roleName;
     }
 
-    public void setRoleName(String roleName) {
+    public void setRoleName(RoleType roleName) {
         this.roleName = roleName;
     }
 
@@ -39,14 +40,14 @@ public class Role {
 
         Role role = (Role) o;
 
-        if (id != role.id) return false;
-        return roleName != null ? roleName.equals(role.roleName) : role.roleName == null;
+        if (id != null ? !id.equals(role.id) : role.id != null) return false;
+        return roleName == role.roleName;
 
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (id ^ (id >>> 32));
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (roleName != null ? roleName.hashCode() : 0);
         return result;
     }
@@ -55,7 +56,7 @@ public class Role {
     public String toString() {
         return "Role{" +
                 "id=" + id +
-                ", roleName='" + roleName + '\'' +
+                ", roleName='" + roleName.name() + '\'' +
                 '}';
     }
 }
