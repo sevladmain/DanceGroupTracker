@@ -17,11 +17,15 @@
     <bean id="userDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDao"/>
     <bean id="roleDao" class="ua.org.dancegrouptracker.dao.hibernate.HRoleDao"/>
     <bean id="userDetailsDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserDetailsDao" />
+    <bean id="groupDao" class="ua.org.dancegrouptracker.dao.hibernate.HGroupDao" />
+    <bean id="userGroupRoleDao" class="ua.org.dancegrouptracker.dao.hibernate.HUserGroupRoleDao"/>
     <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
     <bean id="rolesService" class="ua.org.dancegrouptracker.services.RoleService"/>
     <bean id="userService" class="ua.org.dancegrouptracker.services.UserService"/>
     <bean id="userDetailsService" class="ua.org.dancegrouptracker.services.UserDetailsService"/>
+    <bean id="groupService" class="ua.org.dancegrouptracker.services.GroupService"/>
+    <bean id="userGroupRoleService" class="ua.org.dancegrouptracker.services.UserGroupRoleService"/>
     <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
 </beans>
