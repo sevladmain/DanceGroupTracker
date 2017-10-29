@@ -40,7 +40,7 @@ public class HUserDaoTest {
     public void setUp() throws Exception {
         Role role = new Role();
         role.setId(1l);
-        role.setRoleName(ROLE_USER.name());
+        role.setRoleName(ROLE_USER);
         user = new User();
         user.setUsername("testUser");
         user.setAuthority(role);
@@ -114,7 +114,7 @@ public class HUserDaoTest {
         assertEquals(null, userDouble);
     }
 
-    @Test()
+    @Test(expected = PersistenceException.class)
     @Transactional
     @Rollback
     public void whenDeleteUserThenPersistenceExceptionBecauseOfUserDetailsConstraint(){
