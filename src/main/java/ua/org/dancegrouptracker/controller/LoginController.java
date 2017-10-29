@@ -2,9 +2,7 @@ package ua.org.dancegrouptracker.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -14,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import ua.org.dancegrouptracker.exceptions.EmailExistsException;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
-import ua.org.dancegrouptracker.model.UserDetails;
 import ua.org.dancegrouptracker.services.RoleService;
-import ua.org.dancegrouptracker.services.UserDetailsService;
 import ua.org.dancegrouptracker.services.UserService;
 
 import javax.validation.Valid;

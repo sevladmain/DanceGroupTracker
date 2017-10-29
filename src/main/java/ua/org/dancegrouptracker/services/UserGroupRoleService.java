@@ -41,42 +41,38 @@ public class UserGroupRoleService {
     @Transactional
     public List<User> getAllUsersFromGroup(Group group) {
         List<UserGroupRole> list = userGroupRoleDao.getAllByGroup(group);
-        List<User> users = list.stream()
-                                .map(u -> u.getUser())
-                                .distinct()
-                                .collect(Collectors.toList());
-        return users;
+        return list.stream()
+                .map(UserGroupRole::getUser)
+                .distinct()
+                .collect(Collectors.toList());
     }
 
     @Transactional
     public List<User> getAllUsersFromGroup(Group group, GroupRole role) {
         List<UserGroupRole> list = userGroupRoleDao.getAllByGroup(group);
-        List<User> users = list.stream()
+        return list.stream()
                 .filter(u -> u.getGroupRole() == role)
-                .map(u -> u.getUser())
+                .map(UserGroupRole::getUser)
                 .distinct()
                 .collect(Collectors.toList());
-        return users;
     }
 
     @Transactional
     public List<Group> getAllGroupsFromUser(User user) {
         List<UserGroupRole> list = userGroupRoleDao.getAllByUser(user);
-        List<Group> groups = list.stream()
-                .map(u -> u.getGroup())
+        return list.stream()
+                .map(UserGroupRole::getGroup)
                 .distinct()
                 .collect(Collectors.toList());
-        return groups;
     }
 
     public List<Group> getAllGroupsFromUser(User user, GroupRole role) {
         List<UserGroupRole> list = userGroupRoleDao.getAllByUser(user);
-        List<Group> groups = list.stream()
+        return list.stream()
                 .filter(u -> u.getGroupRole() == role)
-                .map(u -> u.getGroup())
+                .map(UserGroupRole::getGroup)
                 .distinct()
                 .collect(Collectors.toList());
-        return groups;
     }
 
     public boolean checkUserGroupRole(User user, Group group, GroupRole role) {
