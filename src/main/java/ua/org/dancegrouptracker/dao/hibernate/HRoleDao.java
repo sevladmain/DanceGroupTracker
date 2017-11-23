@@ -1,7 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.RoleDao;
@@ -43,7 +43,7 @@ public class HRoleDao implements RoleDao {
     @Transactional
     public List<Role> getAll() {
         Query query = sessionFactory.getCurrentSession().createQuery("select r from Role r");
-        return query.getResultList();
+        return query.list();
     }
 
     @Override

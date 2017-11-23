@@ -1,7 +1,7 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
@@ -22,7 +22,7 @@ public class HGroupDao implements GroupDao {
     public List<Group> getGroupByName(String name) {
         Query query = sessionFactory.getCurrentSession().createQuery("select g from Group g where g.name like :name");
         query.setParameter("name", name);
-        return query.getResultList();
+        return query.list();
     }
 
     @Override
@@ -48,6 +48,6 @@ public class HGroupDao implements GroupDao {
     @Transactional
     public List<Group> getAll() {
         Query query = sessionFactory.getCurrentSession().createQuery("select g from Group g");
-        return query.getResultList();
+        return query.list();
     }
 }

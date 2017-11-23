@@ -1,8 +1,8 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
@@ -47,7 +47,7 @@ public class HUserDao implements UserDao {
     @Transactional
     public List<User> getAll() {
         Query query = sessionFactory.getCurrentSession().createQuery("select u from User u");
-        return query.getResultList();
+        return query.list();
     }
 
     @Override

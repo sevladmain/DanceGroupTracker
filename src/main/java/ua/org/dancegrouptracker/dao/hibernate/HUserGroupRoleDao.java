@@ -2,7 +2,7 @@ package ua.org.dancegrouptracker.dao.hibernate;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
+import org.hibernate.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import ua.org.dancegrouptracker.dao.UserGroupRoleDao;
 import ua.org.dancegrouptracker.model.*;
@@ -44,7 +44,7 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     public List<UserGroupRole> getAllByGroup(Group group) {
         Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where group = :group");
         query.setParameter("group", group);
-        return query.getResultList();
+        return query.list();
     }
 
     @Override
@@ -52,7 +52,7 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     public List<UserGroupRole> getAllByUser(User user) {
         Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where user = :user");
         query.setParameter("user", user);
-        return query.getResultList();
+        return query.list();
     }
 
     @Override
@@ -60,13 +60,13 @@ public class HUserGroupRoleDao implements UserGroupRoleDao {
     public List<UserGroupRole> getAllByGroupRole(GroupRole groupRole) {
         Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr where groupRole = :groupRole");
         query.setParameter("groupRole", groupRole);
-        return query.getResultList();
+        return query.list();
     }
 
     @Override
     @Transactional
     public List<UserGroupRole> getAll() {
         Query query = sessionFactory.getCurrentSession().createQuery("select ugr from UserGroupRole ugr");
-        return query.getResultList();
+        return query.list();
     }
 }
