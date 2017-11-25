@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -114,7 +115,7 @@ public class HUserDaoTest {
         assertEquals(null, userDouble);
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     @Transactional
     @Rollback
     public void whenDeleteUserThenPersistenceExceptionBecauseOfUserDetailsConstraint(){
