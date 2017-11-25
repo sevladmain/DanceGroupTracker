@@ -8,13 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.model.Role;
 import ua.org.dancegrouptracker.model.User;
 
-import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -27,7 +26,7 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
  * Created by SeVlad on 12.03.2017.
  * Tests for HUserDao class
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HUserDaoTest {

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.RoleDao;
 import ua.org.dancegrouptracker.model.Role;
@@ -15,14 +15,15 @@ import ua.org.dancegrouptracker.model.Role;
 import java.util.List;
 
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static ua.org.dancegrouptracker.model.RoleType.ROLE_ADMIN;
 import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
 
 /**
  * Created by SeVlad on 13.03.2017.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HRoleDaoTest {

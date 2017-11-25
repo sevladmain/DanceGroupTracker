@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -7,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDetailsDao;
 import ua.org.dancegrouptracker.model.UserDetails;
 
-import javax.persistence.PersistenceException;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by SeVlad on 14.04.2017.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HUserDetailsDaoTest {
@@ -54,7 +54,7 @@ public class HUserDetailsDaoTest {
         assertEquals("Saved users not equal", userDetails, users.get(0));
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     @Transactional
     @Rollback
     public void whenSaveUserDetailsWithoutUserThenPersistenceException(){

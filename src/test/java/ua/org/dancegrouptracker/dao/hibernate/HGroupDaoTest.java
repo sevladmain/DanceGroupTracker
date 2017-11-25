@@ -1,6 +1,6 @@
 package ua.org.dancegrouptracker.dao.hibernate;
 
-import org.hamcrest.core.IsEqual;
+import org.hibernate.exception.ConstraintViolationException;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,12 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
 
-import javax.persistence.PersistenceException;
 import java.util.List;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -23,7 +22,7 @@ import static org.junit.Assert.assertThat;
 /**
  * Created by SeVlad on 02.05.2017.
  */
-@RunWith(SpringJUnit4ClassRunner.class)
+@RunWith(SpringRunner.class)
 @ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HGroupDaoTest {
@@ -71,7 +70,7 @@ public class HGroupDaoTest {
         assertEquals(groupDouble, group);
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test(expected = ConstraintViolationException.class)
     @Transactional
     @Rollback
     public void deleteExistingGroupTestThenPersistenceExceptionBecauseOfForeignKeys(){
