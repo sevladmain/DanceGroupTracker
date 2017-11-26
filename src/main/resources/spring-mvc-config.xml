@@ -30,5 +30,5 @@
     </mvc:interceptors>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
     <mvc:annotation-driven />
-    <import resource="spring-database-config.xml"/>
+    <import resource="classpath:**/spring-database-config.xml"/>
 </beans>
