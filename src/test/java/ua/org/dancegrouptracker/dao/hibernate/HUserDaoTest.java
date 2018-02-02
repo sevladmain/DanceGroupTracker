@@ -27,7 +27,7 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
  * Tests for HUserDao class
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
+@ContextConfiguration(locations = {"classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HUserDaoTest {
 

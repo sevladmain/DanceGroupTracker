@@ -23,7 +23,7 @@ import static org.junit.Assert.assertThat;
  * Created by SeVlad on 02.05.2017.
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
+@ContextConfiguration(locations = {"classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HGroupDaoTest {
     @Autowired

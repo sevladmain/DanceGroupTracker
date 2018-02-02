@@ -24,7 +24,7 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
  * Created by SeVlad on 13.03.2017.
  */
 @RunWith(SpringRunner.class)
-@ContextConfiguration(locations = {"classpath:/applicationContext.xml", "classpath:/spring-database-config.xml"})
+@ContextConfiguration(locations = {"classpath:/spring-database-config.xml"})
 @ActiveProfiles({"test"})
 public class HRoleDaoTest {
     @Autowired
