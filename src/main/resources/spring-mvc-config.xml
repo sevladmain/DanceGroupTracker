@@ -28,5 +28,4 @@
         </bean>
     </mvc:interceptors>
     <mvc:resources mapping="/resources/**" location="/resources/"/>
-    <import resource="classpath:**/spring-database-config.xml"/>
 </beans>
