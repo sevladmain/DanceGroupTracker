@@ -5,9 +5,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.RoleDao;
 import ua.org.dancegrouptracker.model.Role;
@@ -23,9 +22,8 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
 /**
  * Created by SeVlad on 13.03.2017.
  */
-@RunWith(SpringRunner.class)
-@ContextConfiguration(locations = {"classpath:/spring-database-config.xml"})
-@ActiveProfiles({"test"})
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(locations = "classpath:spring-database-config-test.xml")
 public class HRoleDaoTest {
     @Autowired
     private RoleDao roleDao;
