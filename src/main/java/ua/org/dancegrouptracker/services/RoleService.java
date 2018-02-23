@@ -1,15 +1,18 @@
 package ua.org.dancegrouptracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.RoleDao;
 import ua.org.dancegrouptracker.model.Role;
+import ua.org.dancegrouptracker.model.RoleType;
 
 import java.util.List;
 
 /**
  * Created by SeVlad on 14.03.2017.
  */
+@Service
 public class RoleService {
     @Autowired
     private RoleDao roleDao;
@@ -20,17 +23,18 @@ public class RoleService {
 
     @Transactional
     public Role getRolesById(Long id){
-        return roleDao.read(id);
+        return roleDao.findOne(id);
     }
 
     @Transactional
     public Long saveOrUpdateRole(Role role){
-        return roleDao.saveOrUpdate(role);
+        roleDao.save(role);
+        return role.getId();
     }
 
     @Transactional
     public List<Role> getAllRoles(){
-        return roleDao.getAll();
+        return roleDao.findAll();
     }
 
     @Transactional
@@ -40,6 +44,7 @@ public class RoleService {
 
     @Transactional
     public Role getRolesByName(String name){
-        return roleDao.getRolesByName(name);
+        List<Role> roleList = roleDao.findByRoleName(RoleType.valueOf(name));
+        return roleList.isEmpty() ? null : roleList.get(0);
     }
 }

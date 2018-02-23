@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDetailsDao;
 import ua.org.dancegrouptracker.model.UserDetails;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by SeVlad on 18.04.2017.
  */
+@Service
 public class UserDetailsService {
 
     @Autowired
@@ -17,17 +19,18 @@ public class UserDetailsService {
 
     @Transactional
     public UserDetails getUserDetailsByUsername(String username){
-        return userDetailsDao.read(username);
+        return userDetailsDao.findOne(username);
     }
 
     @Transactional
     public List<UserDetails> getAllUserDetails(){
-        return userDetailsDao.getAll();
+        return userDetailsDao.findAll();
     }
 
     @Transactional
     public String saveOrUpdateUserDetails(UserDetails userDetails){
-        return userDetailsDao.saveOrUpdate(userDetails);
+        userDetailsDao.save(userDetails);
+        return userDetails.getUsername();
     }
 
     @Transactional
