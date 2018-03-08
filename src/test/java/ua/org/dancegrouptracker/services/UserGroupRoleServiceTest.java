@@ -81,7 +81,7 @@ public class UserGroupRoleServiceTest {
                 .filter(u -> u.getGroup().getId() == 1L)
                 .collect(Collectors.toList());
         Group group = filteredList .get(0).getGroup();
-        when(dao.getAllByGroup(group)).thenReturn(filteredList );
+        when(dao.findByGroup(group)).thenReturn(filteredList );
         List<User> users = service.getAllUsersFromGroup(group);
         User user1 = new User();
         user1.setUsername("user1");
@@ -99,7 +99,7 @@ public class UserGroupRoleServiceTest {
                 .filter(u -> u.getGroup().getId() == 1L)
                 .collect(Collectors.toList());
         Group group = results.get(0).getGroup();
-        when(dao.getAllByGroup(group)).thenReturn(filteredList);
+        when(dao.findByGroup(group)).thenReturn(filteredList);
         List<User> users = service.getAllUsersFromGroup(group, GroupRole.MANAGER);
         User user1 = new User();
         user1.setUsername("user1");
@@ -115,7 +115,7 @@ public class UserGroupRoleServiceTest {
                 .filter(u -> u.getUser().getUsername().equals("user1"))
                 .collect(Collectors.toList());
         User user = results.get(0).getUser();
-        when(dao.getAllByUser(user)).thenReturn(filteredList);
+        when(dao.findByUser(user)).thenReturn(filteredList);
         List<Group> groups = service.getAllGroupsFromUser(user);
 
 
@@ -135,7 +135,7 @@ public class UserGroupRoleServiceTest {
                 .filter(u -> u.getUser().getUsername().equals("user1"))
                 .collect(Collectors.toList());
         User user = results.get(0).getUser();
-        when(dao.getAllByUser(user)).thenReturn(filteredList);
+        when(dao.findByUser(user)).thenReturn(filteredList);
         List<Group> groups = service.getAllGroupsFromUser(user, GroupRole.MANAGER);
 
 
@@ -151,7 +151,7 @@ public class UserGroupRoleServiceTest {
 
     @Test
     public void checkExistingGroupRoleForGroupAndUser(){
-        when(dao.getAll()).thenReturn(results);
+        when(dao.findAll()).thenReturn(results);
 
         User user2 = new User();
         user2.setUsername("user2");
