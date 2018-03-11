@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
+import org.mockito.Matchers;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import ua.org.dancegrouptracker.dao.UserGroupRoleDao;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static org.hamcrest.Matchers.any;
 import static org.hamcrest.Matchers.contains;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.*;
@@ -151,7 +153,7 @@ public class UserGroupRoleServiceTest {
 
     @Test
     public void checkExistingGroupRoleForGroupAndUser(){
-        when(dao.findAll()).thenReturn(results);
+        when(dao.findByUserAndGroupAndGroupRole(Matchers.any(User.class), Matchers.any(Group.class), Matchers.any(GroupRole.class))).thenReturn(results);
 
         User user2 = new User();
         user2.setUsername("user2");

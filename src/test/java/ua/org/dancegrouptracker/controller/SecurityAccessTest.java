@@ -3,16 +3,13 @@ package ua.org.dancegrouptracker.controller;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import ua.org.dancegrouptracker.DgtApp;
 import ua.org.dancegrouptracker.model.User;
-import ua.org.dancegrouptracker.services.UserService;
 
 import static org.hamcrest.core.Is.is;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.anonymous;
@@ -26,16 +23,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Created by SeVlad on 18.03.2017.
  */
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = {DgtApp.class})
+@SpringBootTest
 public class SecurityAccessTest {
 
     @Autowired
     private WebApplicationContext context;
 
     private MockMvc mockMvc;
-
-    @Mock
-    private UserService userService;
 
     @Before
     public void setup(){
@@ -60,8 +54,7 @@ public class SecurityAccessTest {
 
     @Test
     public void whenAnonymousUserCanRegister() throws Exception{
-        User user = new User();
-        user.setUsername("test");
+
         mockMvc.perform(post("/register")
                 .param("username", "test")
                 .param("password", "testtest")

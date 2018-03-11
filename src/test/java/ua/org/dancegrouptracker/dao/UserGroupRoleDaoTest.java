@@ -33,6 +33,7 @@ public class UserGroupRoleDaoTest {
     @Before
     public void setUp(){
         userGroupRole = new UserGroupRole();
+        userGroupRole.setId(1L);
         Role role = new Role();
         role.setRoleName(RoleType.ROLE_USER);
         User user =  new User();
