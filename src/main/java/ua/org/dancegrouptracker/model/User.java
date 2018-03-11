@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.model;
 
 import org.hibernate.validator.constraints.NotBlank;
+import ua.org.dancegrouptracker.model.validation.TransientValidationGroup;
 
 import javax.persistence.*;
 import javax.validation.constraints.Pattern;
@@ -21,7 +22,7 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @NotBlank
+    @NotBlank(groups = TransientValidationGroup.class)
     @Size(min=8, max=15)
     @Pattern(regexp = "^\\S+$")
     @Transient
