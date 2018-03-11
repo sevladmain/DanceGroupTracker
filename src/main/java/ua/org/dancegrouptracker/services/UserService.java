@@ -36,10 +36,10 @@ public class UserService {
         if (password != null) {
             user.setEncodedPassword(passwordEncoder.encode(password));
         }
-        if (userDao.getUserByEmail(user.getEmail()) != null)
+        if (!userDao.getUserByEmail(user.getEmail()).isEmpty())
             throw new EmailExistsException();
         else {
-            userDao.save(user);
+            userDao.saveAndFlush(user);
             return user.getUsername();
         }
     }
