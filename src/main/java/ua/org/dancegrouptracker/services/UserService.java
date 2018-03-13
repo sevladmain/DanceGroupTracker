@@ -2,6 +2,7 @@ package ua.org.dancegrouptracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.UserDao;
 import ua.org.dancegrouptracker.exceptions.EmailExistsException;
@@ -12,6 +13,7 @@ import java.util.List;
 /**
  * Created by SeVlad on 14.03.2017.
  */
+@Service
 public class UserService {
     @Autowired
     private UserDao userDao;
@@ -25,7 +27,7 @@ public class UserService {
 
     @Transactional
     public User getUserByUsername(String username) {
-        return userDao.read(username);
+        return userDao.findOne(username);
     }
 
     @Transactional
@@ -34,15 +36,17 @@ public class UserService {
         if (password != null) {
             user.setEncodedPassword(passwordEncoder.encode(password));
         }
-        if (userDao.getUserByEmail(user.getEmail()) != null)
+        if (!userDao.getUserByEmail(user.getEmail()).isEmpty())
             throw new EmailExistsException();
-        else
-            return userDao.saveOrUpdate(user);
+        else {
+            userDao.saveAndFlush(user);
+            return user.getUsername();
+        }
     }
 
     @Transactional
     public List<User> getAllUsers() {
-        return userDao.getAll();
+        return userDao.findAll();
     }
 
     @Transactional

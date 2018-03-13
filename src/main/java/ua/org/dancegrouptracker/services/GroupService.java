@@ -1,6 +1,7 @@
 package ua.org.dancegrouptracker.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ua.org.dancegrouptracker.dao.GroupDao;
 import ua.org.dancegrouptracker.model.Group;
@@ -10,13 +11,15 @@ import java.util.List;
 /**
  * Created by SeVlad on 02.05.2017.
  */
+@Service
 public class GroupService {
     @Autowired
     private GroupDao groupDao;
 
     @Transactional
     public Long saveOrUpdateGroup(Group group) {
-        return groupDao.saveOrUpdate(group);
+        groupDao.save(group);
+        return group.getId();
     }
 
     @Transactional
@@ -26,16 +29,16 @@ public class GroupService {
 
     @Transactional
     public Group findGroupById(Long id) {
-        return groupDao.read(id);
+        return groupDao.findOne(id);
     }
 
     @Transactional
     public List<Group> getAllGroups() {
-        return groupDao.getAll();
+        return groupDao.findAll();
     }
 
     @Transactional
     public List<Group> findGroupByName(String name) {
-        return groupDao.getGroupByName(name);
+        return groupDao.getGroupByNameLike(name);
     }
 }

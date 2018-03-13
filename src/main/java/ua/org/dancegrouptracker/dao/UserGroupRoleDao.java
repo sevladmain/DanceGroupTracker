@@ -1,17 +1,25 @@
 package ua.org.dancegrouptracker.dao;
 
-import ua.org.dancegrouptracker.model.*;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import ua.org.dancegrouptracker.model.Group;
+import ua.org.dancegrouptracker.model.GroupRole;
+import ua.org.dancegrouptracker.model.User;
+import ua.org.dancegrouptracker.model.UserGroupRole;
 
 import java.util.List;
 
 /**
  * Created by SeVlad on 09.05.2017.
  */
-public interface UserGroupRoleDao extends GenericDao<UserGroupRole, Long> {
+@Repository
+public interface UserGroupRoleDao extends JpaRepository<UserGroupRole, Long> {
 
-    List<UserGroupRole> getAllByGroup(Group group);
+    List<UserGroupRole> findByGroup(Group group);
 
-    List<UserGroupRole> getAllByUser(User user);
+    List<UserGroupRole> findByUser(User user);
 
-    List<UserGroupRole> getAllByGroupRole(GroupRole groupRole);
+    List<UserGroupRole> findByGroupRole(GroupRole groupRole);
+
+    List<UserGroupRole> findByUserAndGroupAndGroupRole(User user, Group group, GroupRole groupRole);
 }
