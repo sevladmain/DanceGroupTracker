@@ -1,5 +1,6 @@
 package ua.org.dancegrouptracker.services;
 
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import java.util.List;
  * Created by SeVlad on 18.04.2017.
  */
 @Service
+@Setter
 public class UserDetailsService {
 
     @Autowired
