@@ -9,10 +9,10 @@
     </appender>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>log/testFile.log</file>
+        <file>logs/dgt/testFile.log</file>
         <prudent>true</prudent>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>log/jdbc-%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/dgt/dgtlogs-%d{yyyy-MM-dd}.log</fileNamePattern>
         </rollingPolicy>
         <encoder>
             <Pattern>

@@ -54,7 +54,7 @@ CREATE TABLE USERGROUPROLE(
   CONSTRAINT fk_usergrouprole_users FOREIGN KEY (username) REFERENCES users (username),
   CONSTRAINT fk_usergrouprole_groups FOREIGN KEY (groupid) REFERENCES groups (id)
 );
-INSERT INTO users values ('user','$2a$10$7JW2jh71w.20hEM1N5enBeEhyyqMarWCwHGKwx8mZElLoyTCWXx/C', true, 'user@user.org', '2017-01-01');
+INSERT INTO users values ('user','$2y$10$pQojdwEhljHSv5OlA3F1HOOEFmLOz6pWlsx8QwJh3SCvre0G3qyrG'/*administrator*/, true, 'user@user.org', '2017-01-01');
 INSERT INTO roles (role_name) VALUES ('ROLE_ADMIN');
 INSERT INTO roles (role_name) VALUES ('ROLE_USER');
 INSERT INTO userroles values ('user', 1);
