@@ -1,7 +1,5 @@
 package ua.org.dancegrouptracker.controller;
 
-import lombok.Getter;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
@@ -27,11 +25,9 @@ import static ua.org.dancegrouptracker.model.RoleType.ROLE_USER;
  * Created by SeVlad on 28.02.2017.
  */
 @Controller
-@Slf4j
 public class LoginController {
 
     @Autowired
-    @Getter
     private MessageSource messageSource;
 
     @Autowired
@@ -39,6 +35,10 @@ public class LoginController {
 
     @Autowired
     private RoleService roleService;
+
+    public MessageSource getMessageSource() {
+        return messageSource;
+    }
 
     @RequestMapping(value="/login")
     public String login(@RequestParam(value="error", required = false) String error,
@@ -81,7 +81,6 @@ public class LoginController {
             model.addAttribute("isRegister", true);
             return "login";
         }
-        log.info("New user: " + user.getUsername() + " successfully registererd");
         return "home";
     }
 

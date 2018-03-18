@@ -1,6 +1,5 @@
 package ua.org.dancegrouptracker.services;
 
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,11 +12,14 @@ import java.util.List;
 /**
  * Created by SeVlad on 14.03.2017.
  */
-@Setter
 @Service
 public class RoleService {
     @Autowired
     private RoleDao roleDao;
+
+    public void setRoleDao(RoleDao roleDao) {
+        this.roleDao = roleDao;
+    }
 
     @Transactional
     public Role getRolesById(Long id){
