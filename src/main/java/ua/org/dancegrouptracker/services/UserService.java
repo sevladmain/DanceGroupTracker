@@ -1,6 +1,5 @@
 package ua.org.dancegrouptracker.services;
 
-import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -15,13 +14,16 @@ import java.util.List;
  * Created by SeVlad on 14.03.2017.
  */
 @Service
-@Setter
 public class UserService {
     @Autowired
     private UserDao userDao;
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
     @Transactional
     public User getUserByUsername(String username) {
